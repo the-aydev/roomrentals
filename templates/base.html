@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta
+      name="description"
+      content="{% block meta_description %}RentRoom is a platform who aim to give the best services to their customers by bringing them closer to potential clients{% endblock %}"
+    />
+
+    <title>Rent Room {% block title %}{% endblock %}</title>
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
+  </head>
+  <body>
+    <!-- NavBar -->
+    {% include 'partials/_navbar.html' %}
+    <!-- Main Content -->
+    {% block content %} {% endblock %}
+    <!-- Footer -->
+    {% include 'partials/_footer.html' %}
+    <!-- Scripts -->
+    {% include 'partials/_scripts.html' %}
+
+  </body>
+</html>
