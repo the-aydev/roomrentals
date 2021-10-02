@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta
@@ -18,14 +17,15 @@
     <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
   </head>
   <body>
+
     <!-- NavBar -->
-    {% include 'partials/_navbar.html' %}
+    {% include 'partials/navbar.html' %}
     <!-- Main Content -->
-    {% block content %} {% endblock %}
+    {% block content %} {% endblock content %}
     <!-- Footer -->
-    {% include 'partials/_footer.html' %}
+    {% include 'partials/footer.html' %}
     <!-- Scripts -->
-    {% include 'partials/_scripts.html' %}
+    {% include 'partials/scripts.html' %}
 
   </body>
 </html>
