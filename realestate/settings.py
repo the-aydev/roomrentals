@@ -34,8 +34,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
 
 ]
 
@@ -55,8 +55,26 @@ SITE_ID = 1
 #     }
 # }
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
+AUTH_USER_MODEL = 'users.User'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "number"
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.RegisterForm'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'number'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm",
+                 "login": "users.forms.LoginForm"}
 
 
 MIDDLEWARE = [
@@ -123,7 +141,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'realestate/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -26,16 +26,7 @@
                       <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item @@listing__active">
-                      <a class="nav-link" href="{% url 'listings' %}">Listing</a>
-                  </li>
-                  <li class="nav-item dropdown @@property__active">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Property <span class="fa fa-angle-down"></span>
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item @@ps__active" href="property-single.html">Single property</a>
-                      </div>
+                      <a class="nav-link" href="#">Listing</a>
                   </li>
                   <li class="nav-item dropdown @@pages__active">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -49,7 +40,7 @@
                   </li>
               </ul>
               <div class="top-quote mt-lg-0">
-                  <a href="{% url 'ad' %}" class="btn btn-style btn-primary"><span class="fa fa-home"></span> Add
+                  <a href="#" class="btn btn-style btn-primary"><span class="fa fa-home"></span> Add
                       listiing</a>
               </div>
               <!--/search-right-->
@@ -63,6 +54,21 @@
                   </div>
               </div>
               <!--//search-right-->
+              <li class="nav-item dropdown @@pages__active">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="far fa-user"></i> Dashboard <span class="fa fa-angle-down"></span>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.is_authenticated %}
+                          <a class="dropdown-item @@contact__active" href="{% url 'dashboard' %}">Dashboard</a>
+                          <a class="dropdown-item @@contact__active" href="{% url 'account_logout' %}">Sign Out</a>
+                        {% else %}
+                          <a class="dropdown-item @@about__active" href="{% url 'account_login' %}">Sign In</a>
+                          <a class="dropdown-item @@contact__active" href="{% url 'account_signup' %}">Sign Up</a>
+                        {% endif %}
+                      </div>
+                  </li>
           </div>
 
           <!-- toggle switch for light and dark theme -->

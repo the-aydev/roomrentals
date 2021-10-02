@@ -13,8 +13,8 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             number=number,
-            email=self.normalize_email(email),
             full_name=full_name,
+            email=self.normalize_email(email),
             photo=photo,
         )
 

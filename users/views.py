@@ -16,24 +16,15 @@ class AccountHomeView(LoginRequiredMixin, DetailView):
 
 class RegisterView(CreateView):
     form_class = RegisterForm
-    template_name = 'users/register.html'
+    template_name = 'account/signup.html'
     success_url = '/login/'
 
 
 class LoginView(FormView):
     form_class = LoginForm
-    success_url = '/'
-    template_name = 'users/login.html'
-    default_next = '/'
+    template_name = 'account/login.html'
 
     def form_valid(self, form):
-        next_path = self.get_next_url()
-        return redirect(next_path)
+        number = form.cleaned_data['number']
+        password = form.cleaned_data['password']
         user = authenticate(number=number, password=password)
-
-        # Check here if the user is an admin
-        if user is not None and user.is_active:
-            login(self.request, User)
-            return HttpResponseRedirect(self.success_url)
-        else:
-            return self.form_invalid(form)

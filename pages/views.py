@@ -1,22 +1,22 @@
 from django.core.mail import send_mail
 from django.shortcuts import render
-from listings.choices import price_choices, bedroom_choices, state_choices
+# from listings.choices import price_choices, bedroom_choices, state_choices
 
-from listings.models import Listing
+# from listings.models import Listing
 
 
-def index(request):
-    listings = Listing.objects.order_by(
-        '-list_date').filter(is_published=True)[:3]
+def home(request):
+    # listings = Listing.objects.order_by(
+    #     '-list_date').filter(is_published=True)[:3]
 
-    context = {
-        'listings': listings,
-        'state_choices': state_choices,
-        'bedroom_choices': bedroom_choices,
-        'price_choices': price_choices
-    }
+    # context = {
+    #     'listings': listings,
+    #     'state_choices': state_choices,
+    #     'bedroom_choices': bedroom_choices,
+    #     'price_choices': price_choices
+    # }
 
-    return render(request, 'pages/home.html', context)
+    return render(request, 'pages/home.html')
 
 
 def about(request):
@@ -37,7 +37,7 @@ def contact(request):
             ['djangotest62@gmail.com'],  # to email
         )
 
-        return render(request, 'contact.html', {'message_name': message_name})
+        return render(request, 'pages/contact.html', {'message_name': message_name})
 
     else:
-        return render(request, 'contact.html', {})
+        return render(request, 'pages/contact.html', {})

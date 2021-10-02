@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
+
 User = get_user_model()
 
 
@@ -49,7 +50,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['number', 'full_name', 'photo', 'email', ]
+        fields = ['full_name', 'number', 'photo', 'email', ]
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -82,8 +83,18 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    number = forms.CharField(label='Phone number')
-    password = forms.CharField(widget=forms.PasswordInput)
+    number = forms.CharField(widget=forms.TextInput(
+        attrs={
+            "placeholder": "Phone number",
+            "class": "form-control form-control-lg"
+        }
+    ))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            "placeholder": "Password",
+            "class": "form-control form-control-lg"
+        }
+    ))
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
@@ -94,9 +105,8 @@ class LoginForm(forms.Form):
         data = self.cleaned_data
         number = data.get("number")
         password = data.get("password")
-        user = authenticate(request, username=number, password=password)
+        user = authenticate(request, number=number, password=password)
         if user is None:
             raise forms.ValidationError("Invalid credentials")
-        login(request, user)
         self.user = user
         return data
