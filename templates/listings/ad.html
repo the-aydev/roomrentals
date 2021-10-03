@@ -1,21 +1,10 @@
 {% extends 'base.html' %}
+
 {% load crispy_forms_tags %}
 
 {% block title %} | Post Ad {% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-4">Post Ad</h1>
-          <p class="lead">Complete the form so as to have your Ad listing posted!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
   <section class="w3l-about-breadcrumb">
     <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
         <div class="container pt-lg-5 py-3">
@@ -32,11 +21,24 @@
     </div>
 </section>
 
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">Post Ad</h1>
+          <p class="lead">Complete the form to have your Ad listing posted!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 <div class="container">
   <div class="form-row">
-    <form action="/" method="POST" class="col-5">
-      {% csrf_token %} {{ form|crispy }}
-      <button type="submit" class="btn btn-primary">
+    <form action="listings" method="POST" class="col-5">
+      {% csrf_token %} 
+      {{ form|crispy }}
+      <button type="submit" class="save btn btn-primary">
         Post Ad
       </button>
     </form>

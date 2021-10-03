@@ -29,6 +29,9 @@
                       <a class="nav-link" href="{% url 'listings' %}">Listing</a>
                   </li>
                   <li class="nav-item @@listing__active">
+                      <a class="nav-link" href="{% url 'ad' %}">Post Ad</a>
+                  </li>
+                  <li class="nav-item @@listing__active">
                       <a class="nav-link" href="{% url 'blog_list' %}">Blog</a>
                   </li>
                   <li class="nav-item dropdown @@pages__active">
@@ -37,6 +40,7 @@
                           Pages <span class="fa fa-angle-down"></span>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item @@contact__active" href="{% url 'contact' %}">Upgrade</a>
                           <a class="dropdown-item @@about__active" href="{% url 'about' %}">About us</a>
                           <a class="dropdown-item @@contact__active" href="{% url 'contact' %}">Contact us</a>
                       </div>
@@ -44,14 +48,14 @@
               </ul>
               <div class="top-quote mt-lg-0">
                   <a href="#" class="btn btn-style btn-primary"><span class="fa fa-home"></span> Add
-                      listiing</a>
+                      listing</a>
               </div>
               <!--/search-right-->
               <div class="search mx-3">
                   <input class="search_box" type="checkbox" id="search_box">
                   <label class="fa fa-search" for="search_box"></label>
                   <div class="search_form">
-                      <form action="error.html" method="GET">
+                      <form action="{% url 'search' %}" method="GET">
                           <input type="text" placeholder="Search"><input type="submit" value="search">
                       </form>
                   </div>

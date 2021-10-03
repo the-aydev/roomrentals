@@ -1,3 +1,5 @@
+import datetime
+from datetime import timezone
 from django.contrib import messages
 from django.http import response, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -24,6 +26,7 @@ def index(request):
     return render(request, 'listings/listings.html', context)
 
 
+@login_required
 def listing(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
 
@@ -75,6 +78,7 @@ def search(request):
         'garage_choices': garage_choices,
         'garden_choices': garden_choices,
         'air_condition_choices': air_condition_choices,
+        'kitchen_choices': kitchen_choices,
         'values': request.GET
     }
 
@@ -82,11 +86,28 @@ def search(request):
 
 
 @login_required
-def post_ad(request):
-    form = PostAd(request.POST)
+def ad(request):
     if request.method == "POST":
-        # form = PostAd(request.POST)
+        form = PostAd(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.landlord = request.user
+            post.is_published = True
+            post.list_date = timezone.now()
+            post.save()
+            return response.HttpResponseRedirect('/Your Ad listing has been posted', pk=post.pk)
+        else:
+            form = PostAd()
+    messages.success(
+        request, 'Your Ad has been posted successfully'
+    )
+    return render(request, 'listings/ad.html', {"form": form})
 
+
+@login_required
+def ad(request):
+    if request.method == "POST":
+        form = PostAd(request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.user = request.user
@@ -94,9 +115,10 @@ def post_ad(request):
             redirect('/Your Ad listing has been posted')
         else:
             return render(request, 'listings/ad.html', {'form': form})
-    elif request.method == "GET":
+    else:
         form = PostAd()
         messages.success(
             request, 'Your Ad has been posted successfully'
         )
         return render(request, 'listings/ad.html', {"form": form})
+    return render(request, 'listings/ad.html', {"form": form})

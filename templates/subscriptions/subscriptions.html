@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %} | Subscription options {% endblock %}
+
+{% block content %}
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-0">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'subscription' %}">Upgrade</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Subscription Options</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="box" data-aos="fade-up" data-aos-delay="100">
+              <h3>Silver</h3>
+              <h4><sup>#</sup>100<span> / month</span></h4>
+              <ul>
+                <li>Ad posting for up to five(5) times</li>
+                <li>Chat option enabled</li>
+                <li class="na">Better Ad coverage</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url 'subscribe' %}" class="btn-buy">Subscribe with Paypal</a>
+                <a href="{% url 'subscribe' %}" class="btn-buy">Subscribe with Paystack</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box featured" data-aos="fade-up" data-aos-delay="200">
+              <h3>Gold</h3>
+              <h4><sup>#</sup>200<span> / month</span></h4>
+              <ul>
+                <li>Ad posting for up to fifteen(15) times</li>
+                <li>Chat option enabled</li>
+                <li>Better Ad coverage</li>
+                <li class="na">Boosted Listing</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url 'subscribe' %}" class="btn-buy">Subscribe with Paypal</a>
+                <a href="{% url 'subscribe' %}" class="btn-buy">Subscribe with Paystack</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box" data-aos="fade-up" data-aos-delay="300">
+              <h3>Platinum</h3>
+              <h4><sup>#</sup>300<span> / month</span></h4>
+              <ul>
+                <li>Unlimited Ad posting</li>
+                <li>Chat option enabled</li>
+                <li>Premium Ad coverage</li>
+                <li>Boosted Listing</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url 'subscribe' %}" class="btn-buy">Subscribe with Paypal</a>
+                <a href="{% url 'subscribe' %}" class="btn-buy">Subscribe with Paystack</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+{% endblock content %}

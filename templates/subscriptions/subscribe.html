@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} | Subscription options {% endblock %}
+
+{% block content %}
+
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">Payment Options</h1>
+          <p class="lead">Payment options available are Paystack and Paypal!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Breadcrumb -->
+  <section id="bc" class="mt-0">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'subscribe' %}">Payment options</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  {% comment %} <div class="container">
+    <div >
+      <li>
+        <a href="{% url 'simple-checkout' %}">Paypal</a>
+      </li>
+    </div>
+    <div >
+      <li>
+        <a href="{% url 'subscribe' %}">Paystack</a>
+      </li>
+    </div>
+  </div> {% endcomment %}
+
+  <div class="container">
+    <div class="row">
+      {% for subscription in subscriptions %}
+        <div class="col-lg-6">
+          <br>
+          <div class="card card-body">
+            <h4>{{ subscription.name }}</h4>
+            <hr>
+            <h4>${{ subscription.price }}</h4>
+            <hr>
+            <a target="_blank" class="btn btn-sm btn-warning" href="{% url 'checkout' subscription.id %}">
+              Subscribe now
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock content %}

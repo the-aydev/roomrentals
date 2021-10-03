@@ -5,6 +5,23 @@
 {% block title %} | Search Results {% endblock %}
 
 {% block content %}
+
+  <section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="{% url 'home' %}}">Home</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Search Results</li>
+        </ul>
+    </div>
+</section>
+
 <section id="showcase-inner" class="showcase-search text-white py-5">
     <div class="container">
       <div class="row text-center">
@@ -39,19 +56,6 @@
             <!-- Form Row 2 -->
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label class="sr-only">Bedroom</label>
-                <select name="bedrooms" class="form-control">
-                  <option selected="true" disabled="disabled">Bedroom</option>
-                  {% for key,value in bedroom_choices.items %}
-                      <option value="{{ key }}"
-                      {% if key == values.bedrooms %}
-                        selected
-                      {% endif %}
-                      >{{ value }}</option>
-                    {% endfor %}
-                </select>
-              </div>
-              <div class="col-md-6 mb-3">
                 <select name="price" class="form-control">
                   <option selected="true" disabled="disabled">Max Price (All)</option>
                   {% for key,value in price_choices.items %}
@@ -71,23 +75,6 @@
     </div>
   </section>
 
-  <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="{% url 'listings' %}">Browse Listings</a>
-          </li>
-          <li class="breadcrumb-item active"> Search Results</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
 
   <!-- Listings -->
   <section id="listings" class="py-4">
