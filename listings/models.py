@@ -9,6 +9,10 @@ class Listing(models.Model):
         YES = 'Yes'
         NO = 'No'
 
+    class Bathroom(models.TextChoices):
+        YES = 'Yes'
+        NO = 'No'
+
     class Price(models.TextChoices):
         TENK = '#10,000'
         TWENTYK = '#20,000'
@@ -99,6 +103,8 @@ class Listing(models.Model):
     bedroom = models.IntegerField(default=1)
     kitchen = models.CharField(
         max_length=4, choices=Kitchen.choices, default=Kitchen.NO)
+    bathroom = models.CharField(
+        max_length=4, choices=Bathroom.choices, default=Bathroom.NO)
     garage = models.CharField(
         max_length=4, choices=Garage.choices, default=Garage.NO)
     garden = models.CharField(

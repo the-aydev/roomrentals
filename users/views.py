@@ -21,16 +21,6 @@ class RegisterView(CreateView):
     success_url = '/login/'
 
 
-# class LoginView(FormView):
-#     form_class = LoginForm
-#     template_name = 'account/login.html'
-
-    # def form_valid(self, form):
-    #     """Security check complete. Log the user in."""
-    #     auth_login(self.request, form.get_user())
-    #     return HttpResponseRedirect(self.get_success_url())
-
-
 def login(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)

@@ -1,22 +1,22 @@
 from django.core.mail import send_mail
 from django.shortcuts import render
-# from listings.choices import price_choices, bedroom_choices, state_choices
+from listings.choices import price_choices, state_choices, garage_choices, garden_choices
 
-# from listings.models import Listing
+from listings.models import Listing
 
 
 def home(request):
-    # listings = Listing.objects.order_by(
-    #     '-list_date').filter(is_published=True)[:3]
+    listings = Listing.objects.order_by(
+        '-list_date').filter(is_published=True)[:3]
 
-    # context = {
-    #     'listings': listings,
-    #     'state_choices': state_choices,
-    #     'bedroom_choices': bedroom_choices,
-    #     'price_choices': price_choices
-    # }
+    context = {
+        'listings': listings,
+        'state_choices': state_choices,
+        'price_choices': price_choices,
+        'garage_choices': garage_choices,
+    }
 
-    return render(request, 'pages/home.html')
+    return render(request, 'pages/home.html', context)
 
 
 def about(request):

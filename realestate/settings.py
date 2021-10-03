@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     'crispy_forms',
 
@@ -70,11 +71,9 @@ ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_AUTHENTICATION_METHOD = 'number'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
-LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm",
-                 "login": "users.forms.LoginForm"}
+ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm",}
 
 
 MIDDLEWARE = [

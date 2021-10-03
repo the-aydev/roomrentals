@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block content %}
 
   <!-- Section -->
@@ -8,40 +10,31 @@
 			<div class="container">
 				<div class="middle-section text-center">
 					<div class="section-width">
-						<p>It's great to be home!</p>
-						<h2>Find a property today</h2>
+						<h2>Find a room  today</h2>
 						<div class="most-searches">
-							<h4>Most Searches</h4>
+							<h4>Most searches </h4>
 							<ul>
-								<li><a href="#link">Villa</a></li>
-								<li><a href="#link">Apartment</a></li>
-								<li><a href="#link">Private house</a></li>
+								<li><a href="#link">Lagos</a></li>
+								<li><a href="#link">Big room</a></li>
+								<li><a href="#link">Abuja</a></li>
 							</ul>
 						</div>
 						<form action="#" class="w3l-cover-3-gd" method="GET">
 							<input type="search" name="text" placeholder="Enter keywords" required>
 							<span class="input-group-btn">
-								<select class="btn btn-default" name="ext" required>
-									<option selected="">Office</option>
-									<option>Villa</option>
-									<option>Apartment</option>
-									<option>Private house</option>
-									<option>Building</option>
-									<option>Shop</option>
-									<option>Social housing</option>
-									<option>Town house</option>
+								<select class="btn btn-default" name="ext">
+									<option selected="true">State</option>
+									{% for key,value in state_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
 								</select>
 							</span>
 							<span class="input-group-btn">
-								<select class="btn btn-default" name="ext" required>
-									<option selected="">Select Country</option>
-									<option>Australia</option>
-									<option>London</option>
-									<option>India</option>
-									<option>Bangladesh</option>
-									<option>Saudi Arabia</option>
-									<option>America</option>
-									<option>Srilanka</option>
+								<select class="btn btn-default" name="ext">
+									<option selected="true">Max Price (Any)</option>
+									{% for key,value in price_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
 								</select>
 							</span>
 							<button type="submit" class="btn-primary">Search</button>
@@ -63,14 +56,14 @@
       <div class="heading text-center mx-auto">
           <h3 class="title-big">Latest Listings</h3>
       </div>
+          <div class="row pt-md-5 pt-4">
       {% if listings %}
         {% for listing in listings %}
-          <div class="row pt-md-5 pt-4">
               <div class="col-lg-4 col-md-6">
                   <a href="{% url 'listing' listing.id %}">
                       <div class="box16">
                           <div class="rentext-listing-category"><span>Rent</span></div>
-                          <img class="img-fluid" src="{{ listing.photo_main.url }}" alt="">
+                          <img class="img-fluid" src="{{ listing.photo_main.url }}" alt="img">
                           <div class="box-content">
                               <h3 class="title">${{ listing.price | intcomma }}</h3>
                               <span class="post">{{ listing.address }}</span>
@@ -81,7 +74,7 @@
               </div>
         {% endfor %}
         {% else %}
-          <div class="col-md-12">
+          <div class="heading text-center mx-auto mt-5">
             <p>No Listings Available</p>
           </div>
       {% endif %}

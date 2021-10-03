@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block content %}
 
   <section class="w3l-about-breadcrumb">
@@ -11,22 +13,19 @@
 <section class="w3l-breadcrumb">
     <div class="container">
         <ul class="breadcrumbs-custom-path">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="{% url 'home' %}}">Home</a></li>
             <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
-            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listing</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>{{ listing.title }}</li>
         </ul>
     </div>
 </section>
 
 
 
-{% endblock content %}
-
-
-
 <!--/blog-post-->
 <section class="w3l-blog post-content py-5">
     <div class="container py-lg-4 py-md-3 py-2">
+        <a href="{% url 'listings' %}" class="btn btn-light mb-4">Back To Listings</a>
         <div class="inner mb-4">
             <ul class="blog-single-author-date align-items-center">
                 <li>
@@ -36,19 +35,16 @@
             </ul>
         </div>
         <div class="post-content">
-            <h2 class="title-single"> A digital prescription for the pharma industry</h2>
+            <h2 class="title-single">{{ listing.title }}</h2>
         </div>
         <div class="blo-singl mb-4">
             <ul class="blog-single-author-date align-items-center">
                 <li>
-                    <p>Unnamed road, San Francisco, CA 94102</p>
+                    <p>{{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
                 </li>
-                <li><span class="fa fa-bed"></span> 3 Beds</li>
-                <li><span class="fa fa-bath"></span> 4 Baths</li>
-                <li><span class="fa fa-share-square-o"></span> 1258 sqrft</li>
             </ul>
             <ul class="share-post">
-                <a href="#url" class="cost-estate m-o">$25,0045</a>
+                <a href="#url" class="cost-estate m-o">{{ listing.price | intcomma }}</a>
             </ul>
         </div>
         <div class="row">
@@ -58,61 +54,53 @@
                         <div class="owl-blog owl-carousel owl-theme">
                             <div class="item">
                                 <div class="card">
-                                    <img src="assets/images/p1.jpg" class="img-fluid radius-image" alt="image">
+                                    <img src="{{ listing.photo_main.url }}" class="img-fluid radius-image" alt="image">
                                 </div>
                             </div>
+                            {% if listing.photo_1 %}
                             <div class="item">
                                 <div class="card">
-                                    <img src="assets/images/p2.jpg" class="img-fluid radius-image" alt="image">
+                                    <img src="{{ listing.photo_1.url }}" class="img-fluid radius-image" alt="image">
                                 </div>
                             </div>
+                            {% endif %}
+                            {% if listing.photo_2 %}
                             <div class="item">
                                 <div class="card">
-                                    <img src="assets/images/p3.jpg" class="img-fluid radius-image" alt="image">
+                                    <img src="{{ listing.photo_2.url }}" class="img-fluid radius-image" alt="image">
                                 </div>
                             </div>
+                            {% endif %}
+                            {% if listing.photo_3 %}
+                            <div class="item">
+                                <div class="card">
+                                    <img src="{{ listing.photo_3.url }}" class="img-fluid radius-image" alt="image">
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="single-post-content">
                         <h3 class="post-content-title mb-3">Description</h3>
-                        <p class="mb-4">
-                            Lorem model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                            infancy. Various
-                            versions have evolved over the years, sometimes by accident, sometimes on purpose
-                            injected humour and the like. </p>
-                        <p class="mb-4">When you decide to put your business online it is a little bet tricky step
-                            for novice
-                            computer users because they want to keep data safe & secure.
-                            This problem developed from companies which did not take security seriously. Lorem ipsum
-                            dolor sit amet elit. </p>
+                        <p class="mb-4">{{ listing.description }}</p>
                         <div class="single-bg-white">
                             <h3 class="post-content-title mb-4">Property detail</h3>
                             <ul class="details-list">
-                                <li><strong>Property id :</strong> PRPT12345 </li>
-                                <li><strong>Property size :</strong> 1200sqft </li>
-                                <li><strong>Rooms :</strong> 2 </li>
-                                <li><strong>Bedrooms :</strong> 5 </li>
-                                <li><strong>Bathrooms :</strong> 2 </li>
-                                <li><strong>Exterior material :</strong> Brick </li>
-                                <li><strong>Structure type :</strong> Wood </li>
-                                <li><strong>Garage size :</strong> 15 cars </li>
-                                <li><strong>Garages :</strong> 15 </li>
-                                <li><strong>Property Price :</strong> $ 750 </li>
-                                <li><strong>Built Year :</strong> 2018 </li>
-                                <li><strong>Avaiable from :</strong> Aug 2019 </li>
+                                <li><strong>Address :</strong>{{ listing.address }}</li>
+                                <li><strong>Bedroom :</strong>{{ listing.bedroom }}</li>
+                                <li><strong>Kitchen :</strong>{{ listing.bedroom }}</li>
+                                <li><strong>Garage :</strong>{{ listing.bedroom }}</li>
+                                <li><strong>Garden :</strong> 2 </li>
+                                <li><strong>Bathroom :</strong> Brick </li>
+                                <li><strong>Price :</strong>{{ listing.price | intcomma }}</li>
+                                <li><strong>Avaiable from :</strong>{{ listing.list_date }}</li>
                             </ul>
                         </div>
                         <div class="single-bg-white">
-                            <h3 class="post-content-title mb-4">Amenities</h3>
+                            <h3 class="post-content-title mb-4">Extras</h3>
                             <ul class="details-list">
-                                <li><strong>Air Conditioning </strong></li>
-                                <li><strong>Buil-In Wardrobes </strong> </li>
-                                <li><strong>Dishwasher</strong> </li>
-                                <li><strong>Floor Coverings </strong> </li>
-                                <li><strong>Medical / Clinic </strong> </li>
-                                <li><strong>Fencing</strong> </li>
-                                <li><strong>Internet and wifi </strong> </li>
+                                <li><strong>{{ listing.extras }}</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -129,15 +117,14 @@
                         </div>
 
                         <article class="post">
-                            <figure class="post-thumb"><img src="{% static 'assets/images/l5.jpg' %}" class="radius-image" alt="">
+                            <figure class="post-thumb"><img src="{{ listing.user.photo }}" class="radius-image" alt="">
                             </figure>
-                            <div class="text mb-0"><a href="#blog-single">Company realty
+                            <div class="text mb-0"><a href="#blog-single">{{ listing.user.full_name }}
                                 </a>
-                                <div class="post-info">+(12) 324 567 89</div>
-                                <div class="post-info">companyrealty@mail.com</div>
                             </div>
                         </article>
                         <button type="submit" class="btn btn-primary btn-style w-100">Chat</button>
+                    {% comment %} <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Chat</button> {% endcomment %}
                     </div>
 
                 </aside>
@@ -146,3 +133,7 @@
     </div>
 </section>
 <!--//blog-posts-->
+
+{% endblock content %}
+
+
