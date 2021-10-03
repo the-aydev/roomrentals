@@ -65,7 +65,7 @@
                           <div class="rentext-listing-category"><span>Rent</span></div>
                           <img class="img-fluid" src="{{ listing.photo_main.url }}" alt="img">
                           <div class="box-content">
-                              <h3 class="title">${{ listing.price | intcomma }}</h3>
+                              <h3 class="title">#{{ listing.price | intcomma }}</h3>
                               <span class="post">{{ listing.address }}</span>
                               <span class="post">{{ listing.list_date | timesince }}</span>
                           </div>

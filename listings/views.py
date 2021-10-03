@@ -1,7 +1,6 @@
 import datetime
-from datetime import timezone
 from django.contrib import messages
-from django.http import response, HttpResponse
+from django.http import response, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
@@ -93,32 +92,12 @@ def ad(request):
             post = form.save(commit=False)
             post.landlord = request.user
             post.is_published = True
-            post.list_date = timezone.now()
+            post.list_date = datetime.now()
             post.save()
-            return response.HttpResponseRedirect('/Your Ad listing has been posted', pk=post.pk)
-        else:
-            form = PostAd()
-    messages.success(
-        request, 'Your Ad has been posted successfully'
-    )
-    return render(request, 'listings/ad.html', {"form": form})
-
-
-@login_required
-def ad(request):
-    if request.method == "POST":
-        form = PostAd(request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.user = request.user
-            obj.save()
-            redirect('/Your Ad listing has been posted')
-        else:
-            return render(request, 'listings/ad.html', {'form': form})
+            redirect('/Your Ad listing has been posted', pk=post.listing_id)
     else:
         form = PostAd()
         messages.success(
             request, 'Your Ad has been posted successfully'
         )
-        return render(request, 'listings/ad.html', {"form": form})
     return render(request, 'listings/ad.html', {"form": form})
