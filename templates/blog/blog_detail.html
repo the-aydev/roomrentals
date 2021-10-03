@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="w3l-index3" id="about">
+  <div class="midd-w3 py-5">
+      <div class="container py-lg-5 py-md-4 py-2">
+          <div class="row">
+              <div class="col-lg-5 pr-lg-0">
+              <div class="w3l-left">
+                  <img src="{{ blog_post.image.url }}" class="img-fluid" alt="image">
+              </div>
+              </div>
+              <div class="col-lg-7 pl-lg-0">
+                  <h1>{{ blog_post.title | title }}</h1>
+                  <p class=" text-muted">{{ blog_post.pub_date | date }}</p>
+                  <p class="card-text ">{{ blog_post.description | safe }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+{% endblock content %}

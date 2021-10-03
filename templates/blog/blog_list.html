@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="w3l-index3" id="about">
+  <div class="midd-w3 py-5">
+      <div class="container py-lg-5 py-md-4 py-2">
+        {% for post in blog_posts %}
+          <div class="row">
+              <div class="col-lg-5 pr-lg-0">
+              <div class="w3l-left">
+                {% if post.image %}
+                  <img src="{{ post.image.url }}" class="img-fluid" alt="image">
+                {% endif %}
+              </div>
+              </div>
+              <div class="col-lg-7 pl-lg-0">
+                  <div class="w3l-right-info">
+                    <h6 class="title-small"> {{ post.pub_date }} </h6>
+                    <h3 class="title-big">{{ post.title }}</h3>
+                    <h5 class="mt-4">{{post.description|slice:":200" }} . . .</h5>
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+  </div>
+</section>
+
+
+{% comment %} Pagination {% endcomment %}
+{% if is_paginated %}
+  <nav aria-label="Page navigation conatiner"></nav>
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock content %}

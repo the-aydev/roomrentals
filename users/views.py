@@ -1,3 +1,4 @@
+from django.contrib.auth import login as django_login, authenticate as django_authenticate
 from django.views.generic import CreateView, FormView, DetailView, View, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -20,11 +21,29 @@ class RegisterView(CreateView):
     success_url = '/login/'
 
 
-class LoginView(FormView):
-    form_class = LoginForm
-    template_name = 'account/login.html'
+# class LoginView(FormView):
+#     form_class = LoginForm
+#     template_name = 'account/login.html'
 
-    def form_valid(self, form):
-        number = form.cleaned_data['number']
-        password = form.cleaned_data['password']
-        user = authenticate(number=number, password=password)
+    # def form_valid(self, form):
+    #     """Security check complete. Log the user in."""
+    #     auth_login(self.request, form.get_user())
+    #     return HttpResponseRedirect(self.get_success_url())
+
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            number = request.POST['number']
+            password = request.POST['password']
+            user = django_authenticate(number=number, password=password)
+            if user is not None:
+                if user.is_active:
+                    django_login(request, user)
+                    # user is redirected to dashboard
+                    return redirect('/home')
+    else:
+        form = LoginForm()
+
+    return render(request, 'account/login.html', {'form': form, })

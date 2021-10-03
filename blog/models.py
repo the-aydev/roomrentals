@@ -25,7 +25,7 @@ class BlogPost(models.Model):
     slug = AutoSlugField(populate_from='title', unique=True, null=True)
     image = models.ImageField(blank=True, null=True, upload_to='blog')
     description = models.TextField(blank=True, null=True)
-    published = models.BooleanField(default=False)
+    published = models.BooleanField(default=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

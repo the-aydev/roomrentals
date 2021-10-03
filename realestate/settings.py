@@ -14,10 +14,10 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    # 'pages.apps.PagesConfig',
-    # 'listings.apps.ListingsConfig',
+    'pages.apps.PagesConfig',
+    'listings.apps.ListingsConfig',
     'users.apps.UsersConfig',
-    # 'blog.apps.BlogConfig',
+    'blog.apps.BlogConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
