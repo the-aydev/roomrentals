@@ -9,7 +9,7 @@ environ.Env.read_env()
 env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.environ['secret_key']
+SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
 
