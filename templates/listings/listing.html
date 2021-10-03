@@ -30,10 +30,9 @@
         <div class="inner mb-4">
             <ul class="blog-single-author-date align-items-center">
                 <li>
-                    <div class="listing-category"><span>Buy</span><span>Rent</span></div>
+                    <div class="listing-category"><span>Rent</span></div>
                 </li>
-                <li><span class="fa fa-clock-o"></span> 5 months ago</li>
-                <li><span class="fa fa-eye"></span> 250 views</li>
+                <li><span class="fa fa-clock-o"></span>{{ listing.list_date | timesince }}</li>
             </ul>
         </div>
         <div class="post-content">
