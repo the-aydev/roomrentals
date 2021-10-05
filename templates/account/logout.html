@@ -8,59 +8,22 @@
 
 {% block content %}
 
-<section class="vh-100" style="background-color: #9A616D;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem;">
-          <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img
-                src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/img1.jpg"
-                alt="login form"
-                class="img-fluid" style="border-radius: 1rem 0 0 1rem;"
-              />
-            </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
+  <form class="logout" method="POST" action="{% url 'account_login' %}">
 
-                <form class="login" method="POST" action="{% url 'account_login' %}">
-
-                  <div class="d-flex align-items-center mb-3 pb-1">
-                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                    <span class="h1 fw-bold mb-0">RentRoom</span>
-                  </div>
-
-                  <p>{% trans 'Are you sure you want to sign out?' %}</p>
-
-                  <div class="form-outline mb-4">
-                    <form method="post" action="{% url 'account_logout' %}">
-                      {% csrf_token %}
-                      {% if redirect_field_value %}
-                      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-                      {% endif %}
-                      <button type="submit">{% trans 'Sign Out' %}</button>
-                    </form>
-                  </div>
-                </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="d-flex align-items-center mb-3 pb-1">
+      <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+      <span class="h1 fw-bold mb-0">RentRoom</span>
     </div>
-  </div>
-</section>
+
+    <p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+    <form method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+      {% endif %}
+      <button type="submit">{% trans 'Sign Out' %}</button>
+    </form>
+  </form>
 
 {% endblock %}
-
-<div class="form-row">
-  <form method="post" action="{% url 'account_logout' %}">
-    {% csrf_token %}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-    {% endif %}
-    <button type="submit">{% trans 'Sign Out' %}</button>
-  </form>
-</div>

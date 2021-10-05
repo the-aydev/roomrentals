@@ -1,15 +1,43 @@
 from django.contrib.auth import login as django_login, authenticate as django_authenticate
-from django.views.generic import CreateView, FormView, DetailView, View, UpdateView
+from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from .forms import RegisterForm, UserCreationForm, UserChangeForm, LoginForm
+from .forms import RegisterForm, LoginForm
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
 class AccountHomeView(LoginRequiredMixin, DetailView):
     template_name = 'users/dashboard.html'
+
+    # if not request.user.is_authenticated:
+    # 		return redirect("login")
+
+    # context = {}
+    # if request.POST:
+    # 	form = AccountUpdateForm(request.POST, instance=request.user)
+    # 	if form.is_valid():
+    # 		form.initial = {
+    # 				"email": request.POST['email'],
+    # 				"username": request.POST['username'],
+    # 		}
+    # 		form.save()
+    # 		context['success_message'] = "Updated"
+    # else:
+    # 	form = AccountUpdateForm(
+
+    # 		initial={
+    # 				"email": request.user.email,
+    # 				"username": request.user.username,
+    # 			}
+    # 		)
+
+    # context['account_form'] = form
+
+    # blog_posts = BlogPost.objects.filter(author=request.user)
+    # context['blog_posts'] = blog_posts
 
     def get_object(self):
         return self.request.user
@@ -37,3 +65,8 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'account/login.html', {'form': form, })
+
+
+def logout(request):
+    return logout(request)
+    return redirect('/')
