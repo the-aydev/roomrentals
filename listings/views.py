@@ -39,12 +39,12 @@ def listing(request, listing_id):
 def search(request):
     queryset_list = Listing.objects.order_by('-list_date')
 
-    # Keywords
-    if 'keywords' in request.GET:
-        keywords = request.GET['keywords']
-        if keywords:
-            queryset_list = queryset_list.filter(
-                description__icontains=keywords)
+    # # Keywords
+    # if 'keywords' in request.GET:
+    #     keywords = request.GET['keywords']
+    #     if keywords:
+    #         queryset_list = queryset_list.filter(
+    #             description__icontains=keywords)
 
     # City
     if 'city' in request.GET:
@@ -58,26 +58,15 @@ def search(request):
         if state:
             queryset_list = queryset_list.filter(state__iexact=state)
 
-    # Bedrooms
-    if 'bathroom' in request.GET:
-        bathrooms = request.GET['bathroom']
-        if bathrooms:
-            queryset_list = queryset_list.filter(bedroom__lte=bathrooms)
-
-    # Price
-    if 'price' in request.GET:
-        price = request.GET['price']
-        if price:
-            queryset_list = queryset_list.filter(price__lte=price)
+    # # Price
+    # if 'price' in request.GET:
+    #     price = request.GET['price']
+    #     if price:
+    #         queryset_list = queryset_list.filter(price__lte=price)
 
     context = {
         'state_choices': state_choices,
-        'price_choices': price_choices,
         'listings': queryset_list,
-        'garage_choices': garage_choices,
-        'garden_choices': garden_choices,
-        'air_condition_choices': air_condition_choices,
-        'kitchen_choices': kitchen_choices,
         'values': request.GET
     }
 

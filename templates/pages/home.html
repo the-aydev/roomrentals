@@ -12,31 +12,10 @@
 					<div class="section-width">
 						<h2>Find a room  today</h2>
 						<div class="most-searches">
-							<h4>Most searches </h4>
-							<ul>
-								<li><a href="#link">Lagos</a></li>
-								<li><a href="#link">Big room</a></li>
-								<li><a href="#link">Abuja</a></li>
-							</ul>
+							<h3></h3>
 						</div>
 						<form action="{% url 'search' %}" class="w3l-cover-3-gd" method="GET">
-							<input type="search" name="text" placeholder="Enter keywords" required>
-							<span class="input-group-btn">
-								<select class="btn btn-default" name="ext">
-									<option selected="true">State</option>
-									{% for key,value in state_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-								</select>
-							</span>
-							<span class="input-group-btn">
-								<select class="btn btn-default" name="ext">
-									<option selected="true">Max Price (Any)</option>
-									{% for key,value in price_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-								</select>
-							</span>
+							<input type="search" name="text" placeholder="Where do you want to live?" required>
 							<button type="submit" class="btn-primary">Search</button>
 						</form>
 					</div>
@@ -65,7 +44,7 @@
                           <div class="rentext-listing-category"><span>Rent</span></div>
                           <img class="img-fluid" src="{{ listing.photo_main.url }}" alt="img">
                           <div class="box-content">
-                              <h3 class="title">#{{ listing.price | intcomma }}</h3>
+                              <h3 class="title">₦{{ listing.price | intcomma }}</h3>
                               <span class="post">{{ listing.address }}</span>
                               <span class="post">{{ listing.list_date | timesince }}</span>
                           </div>
