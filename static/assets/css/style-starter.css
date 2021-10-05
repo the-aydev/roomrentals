@@ -10477,39 +10477,8 @@ nav ul li a:hover {
   height: 60px;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  font-family: inherit; }
-
-.w3l-cover-3 .w3l-cover-3-gd span.input-group-btn {
-  width: 23.5%;
-  background: #fff; }
-
-.w3l-cover-3 .w3l-cover-3-gd select {
-  padding: 0 10px;
-  border: none;
-  height: 60px;
-  border-left: 1px solid #eee;
-  background: url(../images/down.png) no-repeat 92% 52%;
-  outline: none;
-  width: 100%;
-  font-size: 16px;
-  color: #888;
-  text-align: left;
-  -webkit-appearance: none;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: .1fr 1fr;
-  align-items: center;
-  padding-left: 15px;
-  border-radius: 3px;
-  font-family: inherit; }
-
-.w3l-cover-3 .w3l-cover-3-gd select option {
-  padding: 10px;
-  background: #f9f9f9; }
-
-.w3l-cover-3 .w3l-cover-3-gd select option:hover {
-  background: #333;
-  color: #fff; }
+  font-family: inherit; 
+  width: 70%; }
 
 .w3l-cover-3 .w3l-cover-3-gd button {
   text-align: center;
