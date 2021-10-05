@@ -1,4 +1,4 @@
-from django.contrib.auth import login as django_login, authenticate as django_authenticate
+from django.contrib.auth import login as django_login, authenticate as django_authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin

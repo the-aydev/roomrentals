@@ -54,4 +54,4 @@ Property that have been verified will have some sort of verified stamp
 There should be a search for verified listing - search query for database
 
 
-Heroku Website = https://roomrentals.herokuapp.com/ | https://git.heroku.com/roomrentals.git
+Heroku Website = https://roomrentals.herokuapp.com/
