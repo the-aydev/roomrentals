@@ -5,15 +5,6 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponseRedirect, HttpResponse, JsonResponse
 
 
-@login_required
-def logout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-        messages.success(request, 'You are now logged out')
-        return redirect('index')
-    return HttpResponseRedirect(request, 'accounts/login.html')
-
-
 def subscription(request):
     return render(request, 'accounts/subscription.html')
 

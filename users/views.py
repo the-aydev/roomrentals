@@ -1,3 +1,5 @@
+from django.http.response import HttpResponseRedirect
+from django.contrib import messages, auth
 from django.contrib.auth import login as django_login, authenticate as django_authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, UpdateView
@@ -67,6 +69,10 @@ def login(request):
     return render(request, 'account/login.html', {'form': form, })
 
 
+@login_required
 def logout(request):
-    logout(request)
-    return redirect('/')
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You are now logged out')
+        return redirect('index')
+    return HttpResponseRedirect(request, 'pages/home.html')
