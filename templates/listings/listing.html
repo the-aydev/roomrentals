@@ -117,14 +117,15 @@
                         </div>
 
                         <article class="post">
-                            <figure class="post-thumb"><img src="{{ listing.user.photo }}" class="radius-image" alt="">
+                        {% if listing.user.photo %}
+                            <figure class="post-thumb"><img src="{{ listing.user.photo.url }}" class="radius-image" alt="img">
                             </figure>
+                            {% endif %}
                             <div class="text mb-0"><a href="#blog-single">{{ listing.user.full_name }}
                                 </a>
                             </div>
                         </article>
-                        <button type="submit" class="btn btn-primary btn-style w-100">Chat</button>
-                    {% comment %} <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Chat</button> {% endcomment %}
+                    <button class="btn btn-primary btn-style w-100" data-toggle="modal" data-target="#inquiryModal">Chat</button>
                     </div>
 
                 </aside>

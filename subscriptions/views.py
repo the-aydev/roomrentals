@@ -6,23 +6,23 @@ from django.http.response import HttpResponseRedirect, HttpResponse, JsonRespons
 
 
 def subscription(request):
-    return render(request, 'accounts/subscription.html')
+    return render(request, 'subscriptions/subscription.html')
 
 
 def simpleCheckout(request):
-    return render(request, 'accounts/simple_checkout.html')
+    return render(request, 'subscriptions/simple_checkout.html')
 
 
 def subscribe(request):
     subscriptions = Subscription.objects.all()
     context = {'subscriptions': subscriptions}
-    return render(request, 'accounts/subscribe.html', context)
+    return render(request, 'subscriptions/subscribe.html', context)
 
 
 def checkout(request, pk):
     subscription = Subscription.objects.get(id=pk)
     context = {'subscription': subscription}
-    return render(request, 'accounts/checkout.html', context)
+    return render(request, 'subscriptions/checkout.html', context)
 
 
 def paymentComplete(request):

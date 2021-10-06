@@ -21,9 +21,11 @@
                   <li class="nav-item active">
                       <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                   </li>
+                  {% if user.is_authenticated %}
                   <li class="nav-item @@listing__active">
                       <a class="nav-link" href="{% url 'listings' %}">Listing</a>
                   </li>
+                  {% endif %}
                   <li class="nav-item @@listing__active">
                       <a class="nav-link" href="{% url 'blog_list' %}">Blog</a>
                   </li>
@@ -46,17 +48,6 @@
                   <a href="{% url 'ad' %}" class="btn btn-style btn-primary">List Your Room</a>
               </div>
               {% endif %}
-              <!--/search-right-->
-              {% comment %} <div class="search mx-3">
-                  <input class="search_box" type="checkbox" id="search_box">
-                  <label class="fa fa-search" for="search_box"></label>
-                  <div class="search_form">
-                      <form action="{% url 'search' %}" method="GET">
-                          <input type="text" placeholder="Search"><input type="submit" value="search">
-                      </form>
-                  </div>
-              </div> {% endcomment %}
-              <!--//search-right-->
               <li class="nav-item dropdown @@pages__active">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

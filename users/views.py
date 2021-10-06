@@ -67,12 +67,3 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'account/login.html', {'form': form, })
-
-
-@login_required
-def logout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-        messages.success(request, 'You are now logged out')
-        return redirect('index')
-    return HttpResponseRedirect(request, 'pages/home.html')

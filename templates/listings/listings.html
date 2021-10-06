@@ -44,18 +44,20 @@
                     </a>
                     <div class="listing-details blog-details align-self">
                         <h4 class="user_title agent">
-                            <a href="#url">{{ listing.title }}</a>
+                            <a href="{% url 'listing' listing.id %}">{{ listing.title }}</a>
                         </h4>
                         <p class="user_position">{{ listing.list_date | timesince }}</p>
                         <ul class="mt-3 estate-info">
-                            <li><span class="fa fa-city"></span>{{ listing.city }} {{ listing.state }}</li>
-                            <li><span class="fab fa-canadian-maple-leaf"></span>Garden: {{ listing.garden }}</li>
-                            <li><span class="fas fa-car-garage"></span>Garage: {{ listing.garage }}</li>
+                            <li>Garden: {{ listing.garden }}</li>
+                            <li>Garage: {{ listing.garage }}</li>
+                            <li>{{ listing.city }}, {{ listing.state }}</li>
                         </ul>
                         <div class="author align-items-center mt-4">
+                            {% if listing.user.photo %}
                             <a href="#img" class="comment-img">
-                                <img src="{{ listing.user.photo }}" alt="img" class="img-fluid">
+                                <img src="{{ listing.user.photo.url }}" alt="img" class="img-fluid">
                             </a>
+                            {% endif %}
                             <ul class="blog-meta">
                                 <li>
                                     <a href="#url">{{ listing.user.full_name }}</a>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from PIL import Image
 
 
 class UserManager(BaseUserManager):
@@ -56,6 +57,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
+
+    # Resizing of photo uploaded
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.photo.path)
+
+        if img.height > 405 or img.width > 556:
+            output_size = (556,405)
+            img.thumbnail(output_size)
+            img.save(self.photo.path)
 
     USERNAME_FIELD = 'number'
     REQUIRED_FIELDS = ['full_name', 'email']
