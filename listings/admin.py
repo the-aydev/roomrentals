@@ -8,9 +8,7 @@ class ListingAdmin(admin.ModelAdmin):
                     'price', 'list_date', 'verified',)
     list_display_links = ('id', 'title', 'verified')
     list_filter = ('verified', 'list_date')
-    list_editable = ('is_published',)
-    search_fields = ('title', 'description', 'address',
-                     'city', 'state', 'zipcode', 'price', 'verified')
+    search_fields = ('title', 'city', 'state', 'price', 'verified')
     list_per_page = 15
 
 

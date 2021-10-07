@@ -55,7 +55,9 @@
                         <div class="author align-items-center mt-4">
                             {% if listing.user.photo %}
                             <a href="#img" class="comment-img">
+                                {% if listing.user.photo.url %}
                                 <img src="{{ listing.user.photo.url }}" alt="img" class="img-fluid">
+                                {% endif %}
                             </a>
                             {% endif %}
                             <ul class="blog-meta">

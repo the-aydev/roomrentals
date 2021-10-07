@@ -34,8 +34,8 @@
 
 
 <div class="container">
-  <div class="form-row">
-    <form action="logout" method="POST" class="">
+  <div class="form-group">
+    <form action="listing" method="POST" class="form-control">
       {% csrf_token %} 
       {{ form|crispy }}
       <a href="/">

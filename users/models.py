@@ -58,16 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
 
-    # Resizing of photo uploaded
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        img = Image.open(self.photo.path)
-
-        if img.height > 405 or img.width > 556:
-            output_size = (556,405)
-            img.thumbnail(output_size)
-            img.save(self.photo.path)
-
     USERNAME_FIELD = 'number'
     REQUIRED_FIELDS = ['full_name', 'email']
 
