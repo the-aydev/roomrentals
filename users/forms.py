@@ -10,6 +10,7 @@ class UserCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(
         label='Confirm Password', widget=forms.PasswordInput)
+    #is_verified = forms.BooleanField(initial=False)
 
     class Meta:
         model = User
@@ -47,6 +48,7 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(
         label='Confirm Password', widget=forms.PasswordInput)
+    #is_verified = forms.BooleanField(initial=False)
 
     class Meta:
         model = User
@@ -76,11 +78,22 @@ class RegisterForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
+        user.number = self.cleaned_data['number']
         user.set_password(self.cleaned_data["password"])
+        #user.is_verified = False
         if commit:
             user.save()
         return user
 
+class VerificationForm(forms.Form):
+    token_number = forms.CharField(max_length=6, required=True)
+    
+    class Meta:
+        fields = ('token_number')
+        
+    def getToken(self):
+        self.full_clean()
+        return self.cleaned_data['token_number']
 
 class LoginForm(forms.Form):
     number = forms.CharField(widget=forms.TextInput(

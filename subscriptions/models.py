@@ -4,6 +4,10 @@ from django.db import models
 class Subscription(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField(null=True, blank=True)
+    ad_detail = models.TextField(blank=True, null=True)
+    chat_detail = models.TextField(blank=True, null=True)
+    coverage_detail = models.TextField(blank=True, null=True)
+    boosted_listing_detail = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

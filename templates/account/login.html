@@ -42,6 +42,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <div class="form-outline mb-4">
     {% csrf_token %}
     {{ form|crispy }}
+  	<input type="hidden" name="next" value="{{ next }}" />
     {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}

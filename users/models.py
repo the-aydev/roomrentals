@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils.translation import ugettext_lazy as _
 from PIL import Image
 
 
@@ -49,9 +50,10 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     full_name = models.CharField(max_length=255, blank=False, null=False)
-    number = models.CharField(max_length=15, unique=True,)
     photo = models.ImageField(blank=True, null=True,
                               upload_to='users/profile_picture')
+    number = models.CharField(_('phone number'), unique=True, max_length=15,)
+    is_verified = models.BooleanField(_('verified'), default=False,)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)

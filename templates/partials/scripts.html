@@ -175,4 +175,26 @@
 <!-- bootstrap -->
 <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 
+
+{% comment %} Pricing {% endcomment %}
+<script src="{% static 'pricing/js/jquery.magnific-popup.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'pricing/js/modernizr.custom.53451.js' %}"></script> 
+
+<script>
+        $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+          type: 'inline',
+          fixedContentPos: false,
+          fixedBgPos: true,
+          overflowY: 'auto',
+          closeBtnInside: true,
+          preloader: false,
+          midClick: true,
+          removalDelay: 300,
+          mainClass: 'my-mfp-zoom-in'
+        });
+                                        
+        });
+</script>		
+
 {% endblock scripts %}

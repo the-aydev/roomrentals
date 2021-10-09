@@ -5,10 +5,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta
       name="description"
       content="{% block meta_description %}RentRoom is a platform who aim to give the best services to their customers by bringing them closer to potential clients{% endblock %}"
     />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
     <title>Rent Room {% block title %}{% endblock %}</title>
 
@@ -17,6 +19,11 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
+    <link href="{% static 'pricing/css/style.css' %}" rel='stylesheet' type='text/css' />
+    <link href="{% static 'pricing/css/popup-box.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'pricing/css/font-awesome.min.css' %}" rel='stylesheet' type='text/css' />
+    <script src="{% static 'pricing/js/jquery.min.js' %}"></script>
+    <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
     <link rel="icon"href="{% static 'favicon.ico' %}">
   </head>
   <body>

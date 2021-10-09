@@ -10,5 +10,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('blog/', include('blog.urls')),
     # path('chat/', include('chat.urls')),
+    path('subscriptions/', include('subscriptions.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

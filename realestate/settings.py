@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'listings.apps.ListingsConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
+    'subscriptions.apps.SubscriptionsConfig',
     # 'chat.apps.ChatConfig',
 
     'django.contrib.admin',
@@ -38,6 +39,15 @@ INSTALLED_APPS = [
 
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
+
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_hotp',
+    'django_otp.plugins.otp_static',
+
+    'otp_twilio',
+
+    'rest_framework',
 
 ]
 
@@ -71,7 +81,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'verify'
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm",}
 
@@ -164,3 +174,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+OTP_TWILIO_ACCOUNT = ''
+OTP_TWILIO_AUTH = ''
+OTP_TWILIO_FROM = ''
+OTP_TWILIO_NO_DELIVERY = False
+OTP_TWILIO_TOKEN_VALIDITY = 18000
+OTP_TWILIO_CHALLENGE_MESSAGE = 'Sent by SMS: {token}'
+OTP_TWILIO_TOKEN_TEMPLATE = 'Sent from Django OTP Test App. Token is {token}'

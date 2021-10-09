@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %} | Subscription options {% endblock %}
+
+{% block content %}
+
+
+  <section class="w3l-about-breadcrumb">
+    <div class="breadumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumbs-custom-path">
+          <li><a href="{% url 'home' %}}">Home</a></li>
+          <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"><a href="{% url 'subscription' %}"></a></span> Upgrade</li>
+      </ul>
+    </div>
+  </section>
+
+  
+					
+<div class="wrap">
+
+{% for subscription in subscriptions %}
+
+	<h1>Subscription Options</h1>
+	{% comment %} <p>Payment options available are Paystack and Paypal!</p> {% endcomment %}
+  <div class="pricing-grids">
+    <div class="pricing-grid-w3ls">
+      <div class="price-value">
+        <h2>{{ subscription.name }}</h2>
+        <p class="price-label-1"><span>₦</span>{{ subscription.price }}</p>
+      </div>
+      <div class="price-bg">
+        <ul class="count-agile">
+          <li>{{ subscription.ad_detail }}</li>
+          <li>{{ subscription.chat_detail }}</li>
+          <li>{{ subscription.coverage_detail }}</li>
+          <li>{{ subscription.boosted_listing_detail }}</li>
+        </ul>
+        <div class="more">
+          <a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="{% url 'checkout' subscription.id %}">Subscribe with Paypal</a>				
+          <a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="{% url 'checkout' subscription.id %}">Subscribe with Paystack</a>				
+        </div>
+      </div>
+    </div>
+    <div class="clear"> </div>
+  </div>
+  <div class="clear"> </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Subscription Options</h2>
+          <p>Payment options available are Paystack and Paypal!</p>
+        </div>
+
+        <div class="row">
+          {% for subscription in subscriptions %}
+
+          <div class="col-lg-4 col-md-6">
+            <div class="box" data-aos="fade-up" data-aos-delay="100">
+              <h3>{{ subscription.name }}</h3>
+              <h4><sup>₦</sup>{{ subscription.price }}<span> / month</span></h4>
+              <ul>
+                <li>{{ subscription.ad_detail }}</li>
+                <li>{{ subscription.chat_detail }}</li>
+                <li>{{ subscription.coverage_detail }}</li>
+                <li>{{ subscription.boosted_listing_detail }}</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url 'checkout' subscription.id %}" class="btn-buy">Subscribe with Paypal</a>
+                <a href="{% url 'checkout' subscription.id %}" class="btn-buy">Subscribe with Paystack</a>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </section><!-- End Pricing Section -->

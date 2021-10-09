@@ -1,0 +1,25 @@
+{% extends "account/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify" %}{% endblock %}
+
+{% block content %}
+
+  <h2>Verification</h2>
+  
+  {% if form.errors %}
+    <p class="error">Sorry, that's not a valid token</p>
+  {% endif %}
+
+  <form action="{% url 'verify' %}" method="post">
+  	{% csrf_token %}
+  	{{form}}
+
+    <input type="submit" value="verify" />
+    
+  </form>
+
+{% endblock %}
