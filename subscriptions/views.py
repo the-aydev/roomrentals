@@ -6,10 +6,6 @@ from django.http.response import HttpResponseRedirect, HttpResponse, JsonRespons
 import json
 
 
-def simpleCheckout(request):
-    return render(request, 'subscriptions/simple_checkout.html')
-
-
 def subscription(request):
     subscriptions = Subscription.objects.all()
     context = {'subscriptions': subscriptions}
@@ -25,4 +21,9 @@ def checkout(request, pk):
 def paymentComplete(request):
     body = json.loads(request.body)
     print('BODY:', body)
+    subscription = Subscription.objects.get(id=body['productId'])
+    Order.objects.create(
+        subscription=subscription
+    )
+
     return JsonResponse('Payment completed!', safe=False)
