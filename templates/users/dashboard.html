@@ -1,7 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block title %} | Dashboard {% endblock %}
+{% block title %} | Dashboard {% endblock %} 
+
 {% block content %}
+
+  <section class="w3l-about-breadcrumb">
+    <div class="breadumb-bg breadcrumb-bg-about pt-5">
+      <div class="container pt-lg-5 py-3"></div>
+    </div>
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumbs-custom-path">
+        <li><a href="{% url 'home' %}}">Home</a></li>
+        <li class="active">
+          <span class="fa fa-angle-right mx-2" aria-hidden="true"
+            ><a href="{% url 'dashboard' %}"></a></span
+          >Profile
+        </li>
+      </ul>
+    </div>
+  </section>
 
   <strong><h4>Hello! I'm not available yet</h4></strong>
 

@@ -35,9 +35,9 @@
                           Pages <span class="fa fa-angle-down"></span>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% if user.is_authenticated %}
-                          <a class="dropdown-item @@contact__active" href="{% url 'subscription' %}">Subscriptions</a>
-                        {% endif %}
+                          {% if user.is_authenticated %}
+                            <a class="dropdown-item @@contact__active" href="{% url 'subscription' %}">Subscriptions</a>
+                          {% endif %}
                           <a class="dropdown-item @@about__active" href="{% url 'about' %}">About us</a>
                           <a class="dropdown-item @@contact__active" href="{% url 'contact' %}">Contact us</a>
                       </div>
