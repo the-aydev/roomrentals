@@ -33,11 +33,11 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">    
-                <div>
+                {% comment %} <div>
                     {% if user.is_authenticated %}
                     <a href="{% url 'account_email' %}">Change E-mail</a>
                     {% endif %}
-                </div>
+                </div> {% endcomment %}
 
                 {% comment %} {% if messages %}
                   <div>
