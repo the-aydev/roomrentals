@@ -23,7 +23,7 @@ img{max-width:100%;}
 /*end reset*/
 /****-----start-body----****/
 body{
-	background:url('../images/1.jpg') no-repeat 0px 0px;
+	/* background:url('../images/tick.png') no-repeat 0px 0px; */
 	background-size: cover;
 	font-family: 'Lato', sans-serif;
 	background-size: cover;
