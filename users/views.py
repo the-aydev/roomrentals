@@ -9,6 +9,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
+from codes.forms import CodeForm
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -85,4 +86,26 @@ def auth_view(request):
         user = authenticate(number=number, password=password)
         if user is not None:
             request.session['pk'] = user.pk
+            return redirect('verify-view')
+    return render(request, 'account/auth.html', {'form': form})
+
+
+def verify_view(request):
+    form = CodeForm(request.POST or None)
+    pk = request.session.get('pk')
+    if pk:
+        user = User.objects.get(pk=pk)
+        code = user.code
+        code_user = f"{user.full_name}: {user.code}"
+        if not request.POST:
+            # Send sms functionality
+        if form.is_valid():
+            num = form.cleaned_data.get('number')
             
+            if str(code) == num:
+                code.save()
+                login(request, user)
+                return redirect('dashboard')
+            else:
+                return redirect('login-view')
+    return render(request, 'verify.html', {'form': form})
