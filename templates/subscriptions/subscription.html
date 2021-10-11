@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} | Subscription options {% endblock%}
 
 {% block content %}
@@ -50,7 +52,7 @@
             class="btn btn-primary"
             data-wow-delay=".5s"
             target="_blank" 
-            href="{% url 'checkout' subscription.id %}"
+            href="{% url 'initiate' %}"
             >Paystack</a>
         </div>
       </div>

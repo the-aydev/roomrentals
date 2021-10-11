@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 
@@ -74,3 +75,14 @@ def login(request):
 def logout(request):
     logout(request)
     return HttpResponse(request, 'account/login.html')
+
+
+def auth_view(request):
+    form = AuthenticationForm()
+    if request.method == "POST":
+        number = request.POST['number']
+        password = request.POST['password']
+        user = authenticate(number=number, password=password)
+        if user is not None:
+            request.session['pk'] = user.pk
+            

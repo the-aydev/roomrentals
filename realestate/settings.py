@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'subscriptions.apps.SubscriptionsConfig',
+    'codes',
     # 'chat.apps.ChatConfig',
 
     'django.contrib.admin',
@@ -74,7 +75,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm",}
+ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm", }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
