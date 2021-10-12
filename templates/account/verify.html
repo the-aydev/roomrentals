@@ -5,10 +5,27 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "Verify" %}{% endblock %}
 
 {% block content %}
 
-  
+  <form class="login" method="POST" action="{% url 'verify-view' %}">
+
+    <div class="d-flex align-items-center mb-2 pb-1">
+      <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+      <span class="h1 fw-bold mb-0">RentRoom</span>
+    </div>
+
+    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Verify account</h5>
+
+    <div class="form-outline mb-4">
+      {% csrf_token %}
+      {{ form|crispy }}
+    </div>
+
+    <div class="pt-1 mb-4">
+      <button class="btn btn-dark btn-lg btn-block" type="submit">Verify</button>
+    </div>
+  </form>
 
 {% endblock %}

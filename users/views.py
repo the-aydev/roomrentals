@@ -1,15 +1,13 @@
 from .models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template.context_processors import csrf
-from django.contrib import messages, auth
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from codes.forms import CodeForm
+from .utils import send_sms
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -56,17 +54,17 @@ class RegisterView(CreateView):
 
 
 def login(request):
+    # form = AuthenticationForm()
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid():
             number = request.POST['number']
             password = request.POST['password']
-            user = authenticate(number=number, password=password)
+            user = authenticate(request, number=number, password=password)
             if user is not None:
                 if user.is_active:
-                    login(request, user)
-                    # user is redirected to dashboard
-                    return redirect('/home')
+                    request.session['pk'] = user.pk
+                    return redirect('verify-view')
     else:
         form = LoginForm()
 
@@ -78,34 +76,23 @@ def logout(request):
     return HttpResponse(request, 'account/login.html')
 
 
-def auth_view(request):
-    form = AuthenticationForm()
-    if request.method == "POST":
-        number = request.POST['number']
-        password = request.POST['password']
-        user = authenticate(number=number, password=password)
-        if user is not None:
-            request.session['pk'] = user.pk
-            return redirect('verify-view')
-    return render(request, 'account/auth.html', {'form': form})
-
-
 def verify_view(request):
     form = CodeForm(request.POST or None)
     pk = request.session.get('pk')
     if pk:
         user = User.objects.get(pk=pk)
         code = user.code
-        code_user = f"{user.full_name}: {user.code}"
+        code_user = f"{user.number}: {user.code}"
         if not request.POST:
-            # Send sms functionality
+            print(code_user)
+            send_sms(code_user, user.number)
         if form.is_valid():
             num = form.cleaned_data.get('number')
-            
+
             if str(code) == num:
                 code.save()
                 login(request, user)
                 return redirect('dashboard')
             else:
                 return redirect('login-view')
-    return render(request, 'verify.html', {'form': form})
+    return render(request, 'account/verify.html', {'form': form})

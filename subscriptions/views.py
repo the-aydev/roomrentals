@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
 from .models import Subscription, Order, Payment
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http.response import JsonResponse
 from .forms import PaymentForm

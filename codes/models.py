@@ -23,4 +23,3 @@ class Code(models.Model):
         code_string = "".join(str(item) for item in code_items)
         self.number = code_string
         super().save(*args, **kwargs)
-    
