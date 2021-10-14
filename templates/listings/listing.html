@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load humanize %}
+
 {% block content %}
 
 <section class="w3l-about-breadcrumb">
@@ -24,15 +25,6 @@
 <!--/blog-post-->
 <section class="w3l-blog post-content py-5">
     <div class="container py-lg-4 py-md-3 py-2">
-        <a href="{% url 'listings' %}" class="btn btn-light mb-4">Back To Listings</a>
-        <div class="inner mb-4">
-            <ul class="blog-single-author-date align-items-center">
-                <li>
-                    <div class="listing-category"><span>Rent</span></div>
-                </li>
-                <li><span class="fa fa-clock-o"></span>{{ listing.list_date | timesince }}</li>
-            </ul>
-        </div>
         <div class="post-content">
             <h2 class="title-single">{{ listing.title }}</h2>
         </div>
@@ -41,6 +33,7 @@
                 <li>
                     <p>{{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
                 </li>
+                <li><span class="fa fa-clock-o"></span>{{ listing.list_date | timesince }}</li>
             </ul>
             <ul class="share-post">
                 <a href="#url" class="cost-estate m-o">{{ listing.price | intcomma }}</a>
@@ -52,6 +45,11 @@
                     <div class="single-post-image mb-5">
                         <div class="owl-blog owl-carousel owl-theme">
                             <div class="item">
+                              <div class="rentext-listing-category">
+                                {% if listing.verified %}
+                                  <span>Verified</span>
+                                {% endif %}
+                              </div>
                                 <div class="card">
                                     <img src="{{ listing.photo_main.url }}" class="img-fluid radius-image" alt="image">
                                 </div>

@@ -27,7 +27,7 @@
       <div class="col-12">
         <h5>Make payment for: ₦ {{payment.amount}}</h5>
           <script src="https://js.paystack.co/v1/inline.js"></script>
-          <button class="btn btn-success" id="django-paystack-button" type="button" onclick="payWithPaystack()"> Make Payment </button> 
+          <button class="btn btn-success" id="django-paystack-button" type="button" onclick="payWithPaystack()"> Subscribe </button> 
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
       let ref = "{{ payment.ref }}";
       let obj = {
         key: "{{ paystack_public_key }}",
-        email: "{{ payment.email }}",
+        email: "{{ email }}",
         amount: "{{ payment.amount_value }}",
         ref: ref,
         callback: function (response) {
@@ -51,13 +51,11 @@
         obj.currency = currency.toUpperCase();
       }
       if (Boolean(plan)) {
-        obj.plan = plan.toUpperCase();
+        obj.plan = plan;
       }
       var handler = PaystackPop.setup (obj);
       handler.openIframe();
     }
   </script>
-
-
 
 {% endblock content %}

@@ -45,7 +45,9 @@
               <div class="col-lg-4 col-md-6">
                   <a href="{% url 'listing' listing.id %}">
                       <div class="box16">
-                          <div class="rentext-listing-category"><span>Rent</span></div>
+                        {% if listing.verified %}
+                          <div class="rentext-listing-category"><span>Verified</span></div>
+                        {% endif %}
                           <img class="img-fluid" src="{{ listing.photo_main.url }}" alt="img">
                           <div class="box-content">
                               <h3 class="title">₦{{ listing.price | intcomma }}</h3>

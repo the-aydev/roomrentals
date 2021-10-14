@@ -7,7 +7,11 @@ from listings.models import Listing
 
 def home(request):
     listings = Listing.objects.order_by(
-        '-list_date').filter(is_published=True)[:3]
+        '-list_date', 'verified').filter(is_published=True)[:6]
+    if Listing.verified == True:
+        Listing.verified = True
+    else:
+        Listing.verified = False
 
     context = {
         'listings': listings,

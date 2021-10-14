@@ -12,11 +12,15 @@ from .forms import PostAd
 
 def index(request):
     listings = Listing.objects.order_by(
-        '-list_date').filter(is_published=True)
+        '-list_date', 'verified').filter(is_published=True)
 
     paginator = Paginator(listings, 10)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
+    if Listing.verified == True:
+        Listing.verified = True
+    else:
+        Listing.verified = False
 
     context = {
         'listings': paged_listings,
@@ -28,6 +32,10 @@ def index(request):
 @login_required
 def listing(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
+    if Listing.verified == True:
+        Listing.verified = True
+    else:
+        Listing.verified = False
 
     context = {
         'listing': listing

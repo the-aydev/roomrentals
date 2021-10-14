@@ -24,17 +24,19 @@
     </div>
   </section>
 
-  <div class="container">
-    <div class="d-flex row justify-content-center align-items-center py-md-5 py-3" style="min-height=90">
-      <div class="col-12">
-        <form action="." method="POST">
-          <h4>Enter Amount</h4>
-          {% csrf_token %}
-          {{ payment_form | crispy }}
-          <input class="btn btn-primary" type="submit" value="submit">
-        </form>
-      </div>
+<div class="pricing-grids">
+  <div class="col-lg">
+    <br />
+    <div class="card card-body">
+      <form action="." method="POST">
+        {% csrf_token %}
+        {{ payment_form | crispy }}
+        <p>
+        <input class="btn btn-primary" type="submit" value="submit" value="Proceed to payment">
+        </p>
+      </form>
     </div>
   </div>
+</div>
 
 {% endblock content %}

@@ -1,16 +1,27 @@
 from django.db import models
-from datetime import datetime
 from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
 
-class Room(models.Model):
-    name = models.CharField(max_length=100)
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        User, related_name="profile", on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to="media/images/")
+
+    def __str__(self):
+        return self.user.username
 
 
 class Message(models.Model):
-    value = models.CharField(max_length=10000)
-    date = models.DateTimeField(default=datetime.now, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    room = models.CharField(max_length=100)
+
+    sender = models.ForeignKey(
+        User, related_name="sent_messages", on_delete=models.CASCADE)
+    receiver = models.ForeignKey(
+        User, related_name="received_messages", on_delete=models.CASCADE)
+    message = models.TextField()
+    seen = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("date_created",)

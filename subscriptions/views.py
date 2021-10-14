@@ -35,21 +35,21 @@ def paymentComplete(request):
 
 def initiate(request):
     if request.method == "POST":
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            payment = form.save(commit=False)
-            return render(request, 'paystack.html', {
-                   'payment': payment, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
+        payment_form = PaymentForm(request.POST)
+        if payment_form.is_valid():
+            payment = payment_form.save(commit=False)
+            return render(request, 'subscriptions/paystack.html', {
+                'payment': payment, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
     else:
         payment_form = PaymentForm()
-    return render(request, 'initiate.html', {'payment_form': payment_form})
+    return render(request, 'subscriptions/initiate.html', {'payment_form': payment_form, 'email': Payment.email, 'amount': Payment.amount})
 
 
-def verify_payment(request, ref):
+def verify_payment(request, ref: str):
     payment = get_object_or_404(Payment, ref=ref)
     verified = payment.verify_payment()
     if verified:
         messages.success(request, "Verification successful!")
     else:
         messages.error(request, "Verification failed")
-    return redirect('initiate-payment')
+    return redirect('subscriptions/initiate.html')
