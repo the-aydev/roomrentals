@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 
 User = get_user_model()
@@ -46,6 +47,7 @@ class UserChangeForm(forms.ModelForm):
 
 
 class RegisterForm(forms.ModelForm):
+    number = PhoneNumberField(widget=PhoneNumberPrefixWidget(initial='NGN'))
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(
         label='Confirm Password', widget=forms.PasswordInput)
@@ -88,12 +90,7 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    number = PhoneNumberField(widget=forms.TextInput(
-        attrs={
-            "placeholder": "Phone number",
-            "class": "form-control form-control-lg"
-        }
-    ))
+    number = PhoneNumberField(widget=PhoneNumberPrefixWidget(initial='NGN'))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             "placeholder": "Password",

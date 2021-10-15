@@ -49,12 +49,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    number = PhoneNumberField(blank=True, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     full_name = models.CharField(max_length=255, blank=False, null=False)
     photo = models.ImageField(blank=True, null=True,
                               upload_to='users/profile_picture')
-    number = PhoneNumberField(
-        _('phone number'), blank=True, unique=True, max_length=15,)
     is_verified = models.BooleanField(_('verified'), default=False,)
     timestamp = models.DateTimeField(auto_now_add=True)
 

@@ -75,7 +75,10 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'verify-view'
 ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_FORMS = {"signup": "users.forms.RegisterForm", }
+ACCOUNT_FORMS = {
+    "signup": "users.forms.RegisterForm",
+    'login': 'users.forms.LoginForm',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
