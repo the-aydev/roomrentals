@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from phonenumber_field.formfields import PhoneNumberField
 
 
 User = get_user_model()
@@ -87,7 +88,7 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    number = forms.CharField(widget=forms.TextInput(
+    number = PhoneNumberField(widget=forms.TextInput(
         attrs={
             "placeholder": "Phone number",
             "class": "form-control form-control-lg"

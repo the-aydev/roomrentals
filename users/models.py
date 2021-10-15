@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 from PIL import Image
 
 
@@ -52,7 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField(max_length=255, blank=False, null=False)
     photo = models.ImageField(blank=True, null=True,
                               upload_to='users/profile_picture')
-    number = models.CharField(_('phone number'), unique=True, max_length=15,)
+    number = PhoneNumberField(
+        _('phone number'), blank=True, unique=True, max_length=15,)
     is_verified = models.BooleanField(_('verified'), default=False,)
     timestamp = models.DateTimeField(auto_now_add=True)
 

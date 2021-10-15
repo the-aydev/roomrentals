@@ -4,15 +4,6 @@ from django.conf import settings
 User = settings.AUTH_USER_MODEL
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(
-        User, related_name="profile", on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to="media/images/")
-
-    def __str__(self):
-        return self.user.username
-
-
 class Message(models.Model):
 
     sender = models.ForeignKey(

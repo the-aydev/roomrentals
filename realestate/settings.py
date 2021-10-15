@@ -19,8 +19,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
     'subscriptions.apps.SubscriptionsConfig',
-    'codes',
-    # 'chat.apps.ChatConfig',
+    'codes.apps.CodesConfig',
+    'chat.apps.ChatConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'crispy_forms',
+    'phonenumber_field',
 
     'django.contrib.sites',
 
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
 
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
-
 ]
 
 SITE_ID = 1

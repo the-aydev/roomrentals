@@ -9,6 +9,10 @@ from .choices import *
 from .models import Listing
 from .forms import PostAd
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+
 
 def index(request):
     listings = Listing.objects.order_by(
@@ -36,6 +40,7 @@ def listing(request, listing_id):
         Listing.verified = True
     else:
         Listing.verified = False
+    users = User.objects.all()
 
     context = {
         'listing': listing

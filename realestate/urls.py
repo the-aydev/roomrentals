@@ -9,7 +9,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('users/', include('users.urls')),
     path('blog/', include('blog.urls')),
-    # path('chat/', include('chat.urls')),
+    path('chat/', include('chat.urls')),
     path('subscriptions/', include('subscriptions.urls')),
     path('codes/', include('codes.urls')),
     path('admin/', admin.site.urls),

@@ -1,9 +1,9 @@
 from .models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.views.generic import CreateView, DetailView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from codes.forms import CodeForm
@@ -13,38 +13,20 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class AccountHomeView(LoginRequiredMixin, DetailView):
-    template_name = 'users/dashboard.html'
+@login_required
+def dashboard(request):
+    users = User.objects.all()
 
-    # if not request.user.is_authenticated:
-    #     return redirect("login")
+    context = {
+        'users': users,
+    }
 
-    # context = {}
-    # if request.POST:
-    # 	form = AccountUpdateForm(request.POST, instance=request.user)
-    # 	if form.is_valid():
-    # 		form.initial = {
-    # 				"email": request.POST['email'],
-    # 				"username": request.POST['username'],
-    # 		}
-    # 		form.save()
-    # 		context['success_message'] = "Updated"
-    # else:
-    # 	form = AccountUpdateForm(
+    return render(request, 'users/dashboard.html', context)
 
-    # 		initial={
-    # 				"email": request.user.email,
-    # 				"username": request.user.username,
-    # 			}
-    # 		)
 
-    # context['account_form'] = form
-
-    # blog_posts = BlogPost.objects.filter(author=request.user)
-    # context['blog_posts'] = blog_posts
-
-    def get_object(self):
-        return self.request.user
+# @login_required
+# def settings(request):
+#     return render(request, 'accounts/settings.html')
 
 
 class RegisterView(CreateView):
@@ -54,7 +36,7 @@ class RegisterView(CreateView):
 
 
 def login(request):
-    # form = AuthenticationForm()
+    form = AuthenticationForm()
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid():

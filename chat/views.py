@@ -1,41 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-
-# Create your views here.
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
 from .models import User, Message
 from django.db.models import Q
-from django.shortcuts import redirect
 import json
-from .forms import UserProfileForm
-from .models import UserProfile
-
-
-def register(request):
-    if request.method == "POST":
-        user_form = UserCreationForm(request.POST, files=request.FILES)
-        user_profile_form = UserProfileForm(request.POST, files=request.FILES)
-        if user_form.is_valid() and user_profile_form.is_valid():
-            user = user_form.save()
-            user_profile = user_profile_form.save(commit=False)
-            user_profile.user = user
-            user_profile.save()
-            return redirect('login')
-        else:
-            messages.error(request, "Please correct errors in the form")
-    else:
-        user_form = UserCreationForm()
-        user_profile_form = UserProfileForm()
-
-    return render(request, 'register.html', {'user_form': user_form, 'user_profile_form': user_profile_form})
-
-
-def homepage(request):
-    users = User.objects.all()
-    return render(request, 'homepage.html', {'users': users})
 
 
 @login_required
@@ -47,7 +16,7 @@ def chatroom(request, pk: int):
     messages.update(seen=True)
     messages = messages | Message.objects.filter(
         Q(receiver=other_user, sender=request.user))
-    return render(request, "chatroom1.html", {"other_user": other_user, 'users': User.objects.all(), "user_messages": messages})
+    return render(request, "chat/chatroom1.html", {"other_user": other_user, 'users': User.objects.all(), "user_messages": messages})
 
 
 @login_required
