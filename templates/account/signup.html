@@ -8,28 +8,18 @@
 
 {% block content %}
 
-  <form class="login" method="POST" action="{% url 'account_login' %}">
-
-    <div class="d-flex align-items-center mb-3 pb-1">
-      <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-      <span class="h1 fw-bold mb-0">RentRoom</span>
-    </div>
-
     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign up</h5>
 
-    <div class="form-outline mb-4">
-      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        {{ form|crispy }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-      </form>
-      <div class="pt-1 mb-4">
-      <button class="btn btn-dark btn-lg btn-block" type="submit">{% trans "Sign Up" %} &raquo;</button>
-      </div>
-    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="{{ login_url }}" style="color: #393f81;">Sign In</a></p>
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form|crispy }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+    </form>
+    <div class="pt-1 mb-4">
+    <button class="btn btn-dark btn-lg btn-block" type="submit">{% trans "Sign Up" %} &raquo;</button>
     </div>
-  </form>
+    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="{{ login_url }}" style="color: #393f81;">Sign In</a></p>
 
 {% endblock %}

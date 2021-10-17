@@ -45,7 +45,7 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class RegisterForm(forms.Form):
+class RegisterForm(forms.ModelForm):
     number = PhoneNumberField(
         widget=PhoneNumberPrefixWidget(initial='NA'))
     password = forms.CharField(widget=forms.PasswordInput)
@@ -55,6 +55,9 @@ class RegisterForm(forms.Form):
     class Meta:
         model = User
         fields = ['full_name', 'number', 'photo', 'email', ]
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -99,10 +102,6 @@ class LoginForm(forms.Form):
             "placeholder": "Password",
         }
     ))
-
-    def __init__(self, request, *args, **kwargs):
-        self.request = request
-        super(LoginForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         request = self.request
