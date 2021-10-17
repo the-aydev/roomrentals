@@ -7,7 +7,7 @@ User = settings.AUTH_USER_MODEL
 
 class Code(models.Model):
     number = models.CharField(max_length=15, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.number

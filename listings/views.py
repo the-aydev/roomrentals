@@ -43,7 +43,7 @@ def listing(request, listing_id):
     users = User.objects.all()
 
     context = {
-        'listing': listing
+        'listing': listing,
     }
 
     return render(request, 'listings/listing.html', context)
@@ -52,12 +52,12 @@ def listing(request, listing_id):
 def search(request):
     queryset_list = Listing.objects.order_by('-list_date')
 
-    # # Keywords
-    # if 'keywords' in request.GET:
-    #     keywords = request.GET['keywords']
-    #     if keywords:
-    #         queryset_list = queryset_list.filter(
-    #             description__icontains=keywords)
+    # Keywords
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            queryset_list = queryset_list.filter(
+                description__icontains=keywords)
 
     # City
     if 'city' in request.GET:
@@ -86,7 +86,7 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-# @login_required
+@login_required
 def ad(request):
     if request.method == "POST":
         form = PostAd(request.POST)

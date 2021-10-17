@@ -35,7 +35,7 @@
 
   {% comment %} <div class="container">
     <div class="form-group">
-      <form action="listing" method="POST" class="form-control">
+      <form action="{% url 'listing' listing.id %}" method="POST" class="form-control">
         {% crispy form %}
         <a href="/">
           <button type="submit" class="save btn btn-primary"

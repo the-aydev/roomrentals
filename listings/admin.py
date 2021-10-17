@@ -9,7 +9,7 @@ class ListingAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title', 'verified')
     list_filter = ('verified', 'list_date')
     search_fields = ('title', 'city', 'state', 'price', 'verified')
-    list_per_page = 15
+    list_per_page = 10
 
 
 admin.site.register(Listing, ListingAdmin)

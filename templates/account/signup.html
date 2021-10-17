@@ -8,8 +8,6 @@
 
 {% block content %}
 
-    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign up</h5>
-
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
       {{ form|crispy }}
@@ -20,6 +18,6 @@
     <div class="pt-1 mb-4">
     <button class="btn btn-dark btn-lg btn-block" type="submit">{% trans "Sign Up" %} &raquo;</button>
     </div>
-    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="{{ login_url }}" style="color: #393f81;">Sign In</a></p>
+    <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="{% url 'account_login' %}" style="color: #393f81;">Sign In</a></p>
 
 {% endblock %}

@@ -52,4 +52,4 @@ def verify_payment(request, ref: str):
         messages.success(request, "Verification successful!")
     else:
         messages.error(request, "Verification failed")
-    return redirect('subscriptions/initiate.html')
+    return redirect('/subscriptions/initiate')
