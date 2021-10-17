@@ -33,18 +33,23 @@
   </section>
 
 
-<div class="container">
-  <div class="form-group">
-    <form action="listing" method="POST" class="form-control">
-      {% csrf_token %} 
-      {{ form|crispy }}
-      <a href="/">
-        <button type="submit" class="save btn btn-primary"
-          List Your Room
-        </button>
-      </a>
-    </form>
+  {% comment %} <div class="container">
+    <div class="form-group">
+      <form action="listing" method="POST" class="form-control">
+        {% crispy form %}
+        <a href="/">
+          <button type="submit" class="save btn btn-primary"
+            List Your Room
+          </button>
+        </a>
+      </form>
+    </div>
+  </div> {% endcomment %}
+
+  <div class="container">
+    <div class="form-group">
+      {% crispy form %}
+    </div>
   </div>
-</div>
 
 {% endblock content %}

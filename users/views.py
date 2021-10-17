@@ -97,6 +97,6 @@ def verify_view(request):
     return render(request, 'account/verify.html', context)
 
 
-def logout(request):
+def user_logout(request):
     logout(request)
-    return HttpResponse(request, 'account/login.html')
+    return redirect('account/login.html')

@@ -86,7 +86,7 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-@login_required
+# @login_required
 def ad(request):
     if request.method == "POST":
         form = PostAd(request.POST)

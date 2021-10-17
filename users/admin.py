@@ -14,9 +14,9 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ['email', 'full_name', 'photo', 'number', 'admin', 'staff']
+    list_display = ['full_name', 'number', 'email', 'photo', 'admin', 'staff']
     list_display_links = ('full_name', 'email', )
-    list_filter = ['admin', 'staff', 'full_name']
+    list_filter = ['admin', 'staff']
     ordering = ('-start_date',)
 
     list_per_page = 25

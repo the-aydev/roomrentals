@@ -17,21 +17,37 @@ class PostAd(forms.ModelForm):
             'description': forms.TextInput(attrs={'placeholder': 'Description'}),
         }
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.helper = FormHelper()
-    #     self.helper.layout = Layout(
-    #         'full_name',
-    #         Row(
-    #             Column('number', css_class='form-group col-md-6 mb-0'),
-    #             Column('password', css_class='form-group col-md-6 mb-0'),
-    #             css_class='form-row'
-    #         ),
-    #         'photo',
-    #         Row(
-    #             Column('password', css_class='form-group col-md-6 mb-0'),
-    #             Column('password_2', css_class='form-group col-md-6 mb-0'),
-    #             css_class='form-row'
-    #         ),
-    #         Submit('submit', 'Sign Up')
-    #     )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'full_name',
+            Row(
+                Column('title', css_class='form-group col-md-6 mb-0'),
+                Column('address', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('state', css_class='form-group col-md-6 mb-0'),
+                Column('city', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            'description',
+            Row(
+                Column('price', css_class='form-group col-md-4 mb-0'),
+                Column('kitchen', css_class='form-group col-md-2 mb-0'),
+                Column('garage', css_class='form-group col-md-2 mb-0'),
+                Column('garden', css_class='form-group col-md-2 mb-0'),
+                Column('air_condition', css_class='form-group col-md-2 mb-0'),
+                css_class='form-row'
+            ),
+            'extras',
+            Row(
+                Column('photo_main', css_class='form-group col-md-6 mb-0'),
+                Column('photo_1', css_class='form-group col-md-6 mb-0'),
+                Column('photo_2', css_class='form-group col-md-6 mb-0'),
+                Column('photo_3', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'List Your Room')
+        )

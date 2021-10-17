@@ -154,6 +154,7 @@ MESSAGE_TAGS = {
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 django_heroku.settings(locals())
 
 PAYSTACK_SECRET_KEY = os.environ['PAYSTACK_SECRET_KEY']
@@ -167,3 +168,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# myaccount.google.com/lesssecureapps
+# accounts.google.com/DisplayUnlockCaptcha
+
+# myaccount.google.com/apppasswords
+
+# Email settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'djangotest62@gmail.com'
+EMAIL_HOST_PASSWORD = 'testdjango_99'
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False

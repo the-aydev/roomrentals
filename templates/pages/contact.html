@@ -9,67 +9,76 @@
     </div>
 </section>
 <section class="w3l-breadcrumb">
-    <div class="container">
-        <ul class="breadcrumbs-custom-path">
-            <li><a href="{% url 'home' %}}">Home</a></li>
-            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
-            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Contact us</li>
-        </ul>
-    </div>
+  <div class="container">
+    <ul class="breadcrumbs-custom-path">
+      <li><a href="{% url 'home' %}}">Home</a></li>
+      <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
+      <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Contact us</li>
+    </ul>
+  </div>
 </section>
 
+
+{% if message_name %}
+  <br>
+  <center>
+    <h2>Thanks {{ message_name }}</h2>
+    <p>We received your email and will respond shortly...</p>
+  </center>
+  <br>
+
+{% else %}
   <!-- contacts -->
 <section class="w3l-contact-7 pt-5" id="contact">
-    <div class="contacts-9 pt-lg-5 pt-md-4">
-        <div class="container">
-            <div class="top-map">
-                <div class="row map-content-9">
-                    <div class="col-lg-8">
-                        <div class="contact-form">
-                            <h5 class="mb-2">Get in touch</h5>
-                            <p class="mb-4">Your email address will not be published. Required fields are marked *</p>
-                            <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="">
-                                <div class="form-grid">
-                                    <div class="input-field">
-                                        <input type="text" name="w3lName" id="w3lName" placeholder="Your Name"
-                                            required="">
-                                    </div>
-                                    <div class="input-field">
-                                        <input type="email" name="w3lSender" id="w3lSender" placeholder="Email"
-                                            required="">
-                                    </div>
-                                </div>
-                                <div class="input-field mt-4">
-                                    <textarea name="w3lMessage" id="w3lMessage" placeholder="Message"></textarea>
-                                </div>
-                                <input type="checkbox"> <label>Save my name, email, and website in this
-                                    browser for the next time I comment</label>
-                                <button type="submit" class="btn btn-primary btn-style mt-3">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 cont-details">
-                        <address>
-                            <h5 class="">Our Office Address</h5>
-                            <p><span class="fa fa-map-marker"></span>Estate sale office, 32, My Street, Kingston,
-                                New York 12401. </p>
-
-                            <h5 class="mt-4 pt-lg-3">Phone informatiom</h5>
-                            <p><span class="fa fa-mobile"></span> <strong>Phone :</strong>
-                                <a href="tel:+1(12) 366 411 4999"> (+1) 366 411 499</a></p>
-
-                            <p><span class="fa fa-phone"></span> <strong>Tel :</strong>
-                                <a href="tel:+1(12) 366 411 4999"> (+1) 366 411 499</a></p>
-
-                            <p> <span class="fa fa-envelope"></span> <strong>Email :</strong>
-                                <a href="mailto:mail@example.com"> mail@example.com</a></p>
-                        </address>
-                    </div>
+  <div class="contacts-9 pt-lg-5 pt-md-4">
+    <div class="container">
+      <div class="top-map">
+        <div class="row map-content-9">
+          <div class="col-lg-8">
+            <div class="contact-form">
+              <h5 class="mb-2">Get in touch</h5>
+              <form action="{% url 'contact' %}" method="POST" class="">
+                {% csrf_token %}
+                <div class="form-grid">
+                  <div class="input-field">
+                    <input type="text" name="w3lName" id="w3lName" placeholder="Your Name"
+                        required="">
+                  </div>
+                  <div class="input-field">
+                    <input type="email" name="w3lSender" id="w3lSender" placeholder="Email"
+                        required="">
+                  </div>
                 </div>
+                <div class="input-field mt-4">
+                  <textarea name="w3lMessage" id="w3lMessage" placeholder="Message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-style mt-3">Send us a message</button>
+              </form>
             </div>
+          </div>
+          {% comment %} <div class="col-lg-4 cont-details">
+              <address>
+                  <h5 class="">Our Office Address</h5>
+                  <p><span class="fa fa-map-marker"></span>Estate sale office, 32, My Street, Kingston,
+                      New York 12401. </p>
+
+                  <h5 class="mt-4 pt-lg-3">Phone informatiom</h5>
+                  <p><span class="fa fa-mobile"></span> <strong>Phone :</strong>
+                      <a href="tel:+1(12) 366 411 4999"> (+1) 366 411 499</a></p>
+
+                  <p><span class="fa fa-phone"></span> <strong>Tel :</strong>
+                      <a href="tel:+1(12) 366 411 4999"> (+1) 366 411 499</a></p>
+
+                  <p> <span class="fa fa-envelope"></span> <strong>Email :</strong>
+                      <a href="mailto:mail@example.com"> mail@example.com</a></p>
+              </address>
+          </div> {% endcomment %}
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- //contacts -->
+{% endif %}
 
 {% endblock content %}
