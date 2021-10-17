@@ -2,9 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
-from .models import User, Message
+from .models import Message
 from django.db.models import Q
 import json
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 @login_required
@@ -41,6 +44,7 @@ def ajax_load_messages(request, pk):
 
         m = Message.objects.create(
             receiver=other_user, sender=request.user, message=message)
+
         message_list.append({
             "sender": request.user.full_name,
             "full_name": request.user.full_name,

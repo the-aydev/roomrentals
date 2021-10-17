@@ -78,6 +78,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_admin(self):
         return self.admin
 
+    @property
+    def get_photo_url(self):
+        if self.photo and hasattr(self.photo, 'url'):
+            return self.photo.url
+        else:
+            return "/static/user.jpg"
+
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
         # Simplest possible answer: Yes, always

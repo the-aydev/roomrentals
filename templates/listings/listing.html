@@ -13,7 +13,7 @@
 <section class="w3l-breadcrumb">
 <div class="container">
     <ul class="breadcrumbs-custom-path">
-        <li><a href="{% url 'home' %}}">Home</a></li>
+        <li class="active"><span href="{% url 'home' %}">Home</span></li>
         <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
         <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>{{ listing.title }}</li>
     </ul>
@@ -110,7 +110,7 @@
                     <!-- Popular Post Widget-->
                     <div class="sidebar-widget popular-posts">
                         <div class="sidebar-title">
-                            <h4>Contact the landlord</h4>
+                            <h4>Landlord</h4>
                         </div>
 
                         <article class="post">
@@ -122,7 +122,10 @@
                                 </a>
                             </div>
                         </article>
-                    <button class="btn btn-primary btn-style w-100" data-toggle="modal" data-target="#inquiryModal"href="{% url 'chatroom' pk %}" >Chat</button>
+                        <div>
+                            <a href="{% url 'chatroom' user.pk %}"><button class="btn btn-primary btn-style w-100" data-toggle="modal" data-target="#inquiryModal" href="{% url 'chatroom' user.pk %}" >Chat</button>
+                            </a>
+                        </div>
                     </div>
 
                 </aside>

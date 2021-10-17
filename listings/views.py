@@ -25,9 +25,11 @@ def index(request):
         Listing.verified = True
     else:
         Listing.verified = False
+    users = User.objects.all()
 
     context = {
         'listings': paged_listings,
+        'users': users,
     }
 
     return render(request, 'listings/listings.html', context)
@@ -44,6 +46,7 @@ def listing(request, listing_id):
 
     context = {
         'listing': listing,
+        'users': users,
     }
 
     return render(request, 'listings/listing.html', context)
@@ -103,3 +106,27 @@ def ad(request):
             request, 'Your Ad has been posted successfully'
         )
     return render(request, 'listings/ad.html', {"form": form})
+
+
+# @login_required
+# def ad(request, pk=None):
+#     instance = User.objects.get(pk=pk) if pk else None
+#     context = dict(save_pk=pk or "")
+#     if request.method == 'POST':
+#         # Only backend upload should be posting here
+#         context['backend_form'] = form = PostAd(
+#             request.POST, request.FILES, instance=instance)
+#         if form.is_valid():
+#             # Uploads image and creates a model instance for it
+#             context['posted'] = form.save(commit=False)
+#             context['landlord'].user = request.user
+#             context['is_published'].user = True
+#             context['list_date'].user = datetime.now()
+#             context['posted'].save()
+
+#         instance = User.objects.get(pk=pk) if pk else None
+#     else:
+#         # Form demonstrating backend upload
+#         context['backend_form'] = PostAd(instance=instance)
+
+#     return render(request, 'listings/ad.html', context)

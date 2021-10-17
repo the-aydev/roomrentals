@@ -1,8 +1,10 @@
 from django.core.mail import send_mail
 from django.shortcuts import render
 from listings.choices import price_choices, state_choices, garage_choices, garden_choices
-
 from listings.models import Listing
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def home(request):
@@ -13,11 +15,14 @@ def home(request):
     else:
         Listing.verified = False
 
+    users = User.objects.all()
+
     context = {
         'listings': listings,
         'state_choices': state_choices,
         'price_choices': price_choices,
         'garage_choices': garage_choices,
+        'users': users,
     }
 
     return render(request, 'pages/home.html', context)

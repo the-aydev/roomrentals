@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+{% load crispy_forms_tags %}
+
+{% block title %} | Chatroom {% endblock %}
+
+{% block content %}
+
     <style>
         * {
             box-sizing: border-box;
@@ -67,33 +68,45 @@
         }
 
     </style>
-</head>
 
-<body>
-    <div class="container-fluid">
-        <div class="col-md-4">
-
+    <section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
         </div>
-        <div class="col-md-8">
-            <div class="header">{{ other_user.username }}</div>
-    <div class="messages-area">
-        {% for message in messages %}
-        <div class="message 
-        {% if message.sender == request.user %}right{% else %}left{% endif %}
-        ">
-            <div class="sent-by">{{ message.sender.username }}</div>
-            <div class="content">{{ message.message }}</div>
-        </div>
-        {% endfor %}
     </div>
-    <div class="input-area">
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li class="active"><span href="{% url 'home' %}">Home</span></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Ad</li>
+        </ul>
+    </div>
+  </section>
+
+  <div class="container-fluid">
+    <div class="col-md-8">
+      <div class="header">{{ other_user.full_name }}</div>
+      <div class="messages-area">
+        {% for message in messages %}
+          <div class="message 
+            {% if message.sender == request.user %}right{% else %}left{% endif %}
+          ">
+            <div class="sent-by">{{ message.sender.full_name }}</div>
+            <div class="content">{{ message.message }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="input-area">
         <input type="text" id="message-input">
         <button id="send-btn">Send</button>
+      </div>
     </div>
-        </div>
-    </div>
-    
+  </div>
+
 </body>
+
 <script>
     let message_send_btn = document.getElementById("send-btn");
     let message_input = document.getElementById("message-input");
@@ -150,5 +163,4 @@
     setInterval(load_messages, 2000);
 </script>
 
-
-</html>
+{% endblock content %}

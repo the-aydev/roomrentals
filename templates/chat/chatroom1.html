@@ -4,9 +4,12 @@
 
 {% load markdown %}
 
+{% block title %} | Chatroom {% endblock %}
+
 {% load chat_tags %}
 
 {% block content %}
+
 <style>
     .special-height {
         max-height: calc(100vh - 58px);
@@ -183,6 +186,22 @@
     }
 </style>
 
+  <section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+      <div class="container pt-lg-5 py-3">
+      </div>
+    </div>
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumbs-custom-path">
+        <li class="active"><span href="{% url 'home' %}">Home</span></li>
+        <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
+        <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Chat</li>
+      </ul>
+    </div>
+  </section>
+
 <div class="container-fluid forum-lg-100-overflow-hidden">
 
     <div class="row forum-md-100-fixed">
@@ -200,20 +219,20 @@
                         <input type="text" class="user-search" placeholder="search">
                     </div>
                     {% for user in users %}
-                    <div class="contacts" data-username="{{ user.username }}">
+                    <div class="contacts" data-username="{{ user.full_name }}">
 
                         <div class="pb-1 d-flex flex-row  align-items-center">
                             <div class="h-100">
                                 
-                                    <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
-                                        src="{{ user.profile.picture.url }}">
+                              <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
+                                  src="{{ user.picture.url }}">
                               
                             </div>
                             <div class="card-body py-1">
                                 <a href="{% url 'chatroom' user.pk %}" class="d-flex d-row-flex justify-content-between">
                                     <div class="info">
                                         <p class="font-large font-weight-bold color-primary f p-0 m-0">
-                                            {{ user.username }}
+                                            {{ user.full_name }}
                                         </p>
                                         
                                     </div>
@@ -246,14 +265,14 @@
                         <div class="h-100">
                             
                                 <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
-                                    src="{{ user.profile.photo.url }}">
+                                    src="{{ user.picture.url }}">
                             
                         </div>
                         <div class="card-body py-1">
                             <a href="{% url 'chatroom' user.pk %}" class="d-flex d-row-flex justify-content-between">
                                 <div class="info">
                                     <p class="font-large font-weight-bold color-primary f p-0 m-0">
-                                        {{ user.username }}
+                                        {{ user.full_name }}
                                     </p>
                                     
                                 </div>
@@ -294,7 +313,7 @@
                         class="user-message-container {% if request.user == user_message.sender %} sent {% else %} received{% endif %}">
                         <div class="chat-user-img">
                             <img class="img-thumbnail  rounded-circle"
-                                src="{{ user_message.sender.profile.picture.url }}">
+                                src="{{ user_message.sender.picture.url }}">
                         </div>
 
                         <div class="user-message text-wrap">
@@ -314,7 +333,7 @@
                                             <div class="dropdown-menu dropdown-warning  dropdown-menu-right shadow-sm"
                                                 aria-labelledby="dropdownMenuButton">
 
-                                                <a class="reply-btn dropdown-item p-1" data-username="{{ user_message.sender.username }}" data-message="{{ user_message.get_reply_message }}" >Reply</a>
+                                                <a class="reply-btn dropdown-item p-1" data-username="{{ user_message.sender.full_name }}" data-message="{{ user_message.get_reply_message }}" >Reply</a>
                                                 {% if user_message.sender == request.user %}
                                                 <a class="dropdown-item p-1 delete-message-btn"  data-url="{{ user_message.get_delete_url }}" data-target="user-message-{{ user_message.pk }}">
                                                     Delete
@@ -341,9 +360,9 @@
                 <div class="bg-dark d-flex align-items-center px-3 px-md-5 py-1">
                     <img class="img-thumbnail rounded-circle" style="height: 60px !important; width: 60px !important;"
                         src="{{ other_user.profile.picture.url }}">
-                    <p class="text-weight-bold font-xlarge pl-3 m-0 text-white">{{ other_user.username }} <br>
+                    <p class="text-weight-bold font-xlarge pl-3 m-0 text-white">{{ other_user.full_name }} <br>
                     </p>
-                <a class="btn btn-danger ml-auto" href="{% url 'logout' %}">Log Out</a>
+                <a class="btn btn-danger ml-auto" href="{% url 'account_logout' %}">Log Out</a>
 
                 </div>
 

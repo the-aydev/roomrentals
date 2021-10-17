@@ -16,6 +16,7 @@ class PostAd(forms.ModelForm):
             'address': forms.TextInput(attrs={'placeholder': '1234 Main St'}),
             'description': forms.TextInput(attrs={'placeholder': 'Description'}),
         }
+        # exclude = ('full_name',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

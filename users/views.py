@@ -32,24 +32,6 @@ class RegisterView(CreateView):
     success_url = '/users/login/'
 
 
-# def user_login(request):
-#     form = AuthenticationForm()
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             number = request.POST['number']
-#             password = request.POST['password']
-#             user = authenticate(request, number=number, password=password)
-#             if user is not None:
-#                 if user.is_active:
-#                     request.session['pk'] = user.pk
-#                     return redirect('/users/verify/')
-#     else:
-#         form = LoginForm()
-
-#     return render(request, 'account/login.html', {'form': form})
-
-
 def user_login(request):
     form = LoginForm()
     if request.method == 'POST':
