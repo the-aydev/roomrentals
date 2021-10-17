@@ -1,3 +1,5 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column
 from django import forms
 
 from .models import Listing
@@ -14,3 +16,22 @@ class PostAd(forms.ModelForm):
             'address': forms.TextInput(attrs={'placeholder': '1234 Main St'}),
             'description': forms.TextInput(attrs={'placeholder': 'Description'}),
         }
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = FormHelper()
+    #     self.helper.layout = Layout(
+    #         'full_name',
+    #         Row(
+    #             Column('number', css_class='form-group col-md-6 mb-0'),
+    #             Column('password', css_class='form-group col-md-6 mb-0'),
+    #             css_class='form-row'
+    #         ),
+    #         'photo',
+    #         Row(
+    #             Column('password', css_class='form-group col-md-6 mb-0'),
+    #             Column('password_2', css_class='form-group col-md-6 mb-0'),
+    #             css_class='form-row'
+    #         ),
+    #         Submit('submit', 'Sign Up')
+    #     )

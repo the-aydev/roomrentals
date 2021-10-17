@@ -12,7 +12,6 @@ class UserCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(
         label='Confirm Password', widget=forms.PasswordInput)
-    #is_verified = forms.BooleanField(initial=False)
 
     class Meta:
         model = User
@@ -46,12 +45,12 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class RegisterForm(forms.ModelForm):
-    number = PhoneNumberField(widget=PhoneNumberPrefixWidget(initial='NGN'))
+class RegisterForm(forms.Form):
+    number = PhoneNumberField(
+        widget=PhoneNumberPrefixWidget(initial='NA'))
     password = forms.CharField(widget=forms.PasswordInput)
     password_2 = forms.CharField(
         label='Confirm Password', widget=forms.PasswordInput)
-    #is_verified = forms.BooleanField(initial=False)
 
     class Meta:
         model = User
@@ -90,11 +89,14 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    number = PhoneNumberField(widget=PhoneNumberPrefixWidget(initial='NGN'))
+    number = PhoneNumberField(widget=forms.TextInput(
+        attrs={
+            "placeholder": "Phone number",
+        }
+    ))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             "placeholder": "Password",
-            "class": "form-control form-control-lg"
         }
     ))
 
@@ -108,7 +110,9 @@ class LoginForm(forms.Form):
         number = data.get("number")
         password = data.get("password")
         user = authenticate(request, number=number, password=password)
-        if user is None:
+        if user is not None:
+            login(request, user)
+        else:
             raise forms.ValidationError("Invalid credentials")
         self.user = user
         return data

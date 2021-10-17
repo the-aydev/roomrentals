@@ -68,17 +68,15 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = 'users.User'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = "number"
-ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.RegisterForm'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'verify-view'
 ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_FORMS = {
-    "signup": "users.forms.RegisterForm",
-    'login': 'users.forms.LoginForm',
-}
+ACCOUNT_FORMS = {'login': 'users.forms.LoginForm'}
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.RegisterForm'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,5 +1,5 @@
-from .models import User
 from django.contrib.auth.forms import AuthenticationForm
+from .models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -35,6 +35,25 @@ class RegisterView(CreateView):
     success_url = '/login/'
 
 
+# def login(request):
+#     form = LoginForm(request.POST or None)
+#     context = {
+#         "form": form,
+#     }
+#     if form.is_valid():
+#         number = request.POST['number']
+#         password = request.POST['password']
+#         user = authenticate(request, number=number, password=password)
+#         if user is not None:
+#             request.session['pk'] = user.pk
+#             login(request, user)
+#             return redirect('verify-view')
+#     else:
+#         form = LoginForm()
+
+#     return render(request, 'account/login.html', context)
+
+
 def login(request):
     form = AuthenticationForm()
     if request.method == 'POST':
@@ -53,13 +72,11 @@ def login(request):
     return render(request, 'account/login.html', {'form': form, })
 
 
-def logout(request):
-    logout(request)
-    return HttpResponse(request, 'account/login.html')
-
-
 def verify_view(request):
     form = CodeForm(request.POST or None)
+    context = {
+        'form': form,
+    }
     pk = request.session.get('pk')
     if pk:
         user = User.objects.get(pk=pk)
@@ -74,7 +91,12 @@ def verify_view(request):
             if str(code) == num:
                 code.save()
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('users/dashboard.html')
             else:
                 return redirect('login-view')
-    return render(request, 'account/verify.html', {'form': form})
+    return render(request, 'account/verify.html', context)
+
+
+def logout(request):
+    logout(request)
+    return HttpResponse(request, 'account/login.html')
