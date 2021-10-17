@@ -223,10 +223,10 @@
 
                         <div class="pb-1 d-flex flex-row  align-items-center">
                             <div class="h-100">
-                                
+                              {% if user.photo %}
                               <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
-                                  src="{{ user.picture.url }}">
-                              
+                                  src="{{ user.photo.url }}">
+                              {% endif %}
                             </div>
                             <div class="card-body py-1">
                                 <a href="{% url 'chatroom' user.pk %}" class="d-flex d-row-flex justify-content-between">
@@ -263,10 +263,10 @@
 
                     <div class="pb-1 d-flex flex-row align-items-center ">
                         <div class="h-100">
-                            
+                            {% if user.photo %}
                                 <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
-                                    src="{{ user.picture.url }}">
-                            
+                                    src="{{ user.photo.url }}">
+                            {% endif %}
                         </div>
                         <div class="card-body py-1">
                             <a href="{% url 'chatroom' user.pk %}" class="d-flex d-row-flex justify-content-between">
@@ -312,8 +312,7 @@
                     <div
                         class="user-message-container {% if request.user == user_message.sender %} sent {% else %} received{% endif %}">
                         <div class="chat-user-img">
-                            <img class="img-thumbnail  rounded-circle"
-                                src="{{ user_message.sender.picture.url }}">
+                            <img class="img-thumbnail  rounded-circle" src="{{ user_message.sender.photo.url }}">
                         </div>
 
                         <div class="user-message text-wrap">
@@ -359,11 +358,9 @@
 
                 <div class="bg-dark d-flex align-items-center px-3 px-md-5 py-1">
                     <img class="img-thumbnail rounded-circle" style="height: 60px !important; width: 60px !important;"
-                        src="{{ other_user.profile.picture.url }}">
+                        src="{{ other_user.photo.url }}">
                     <p class="text-weight-bold font-xlarge pl-3 m-0 text-white">{{ other_user.full_name }} <br>
                     </p>
-                <a class="btn btn-danger ml-auto" href="{% url 'account_logout' %}">Log Out</a>
-
                 </div>
 
             </div>
@@ -494,7 +491,7 @@
         let chat_user_img = document.createElement("div");
         chat_user_img.classList.add("chat-user-img");
         let image = document.createElement("img");
-        image.src = message["picture"];
+        image.src = message["photo"];
         image.classList.add("img-thumbnail", "rounded-circle");
         chat_user_img.appendChild(image);
         // construct message content
