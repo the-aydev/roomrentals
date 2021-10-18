@@ -225,7 +225,7 @@
                             <div class="h-100">
                               {% if user.photo %}
                               <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
-                                  src="{{ user.photo.url }}">
+                                  src="{{ user.get_photo_url }}">
                               {% endif %}
                             </div>
                             <div class="card-body py-1">
@@ -265,7 +265,7 @@
                         <div class="h-100">
                             {% if user.photo %}
                                 <img style="width: 60px; height: 60px;" class="img-thumbnail rounded-circle"
-                                    src="{{ user.photo.url }}">
+                                    src="{{ user.get_photo_url }}">
                             {% endif %}
                         </div>
                         <div class="card-body py-1">
@@ -296,9 +296,9 @@
         <div class="col-lg-8 col-md-8">
             <div class=" chat-area">
                 <div class="message-input-area p-0 p-sm-2">
-                    <button id="message-send-btn" style="font-size: 40px;"><i class="fas fa-caret-right"></i></button>
+                    <button id="message-send-btn" style="font-size: 40px;"><i class="fas fa-caret-right btn btn-primary"></i></button>
                     
-                    <textarea class="py-2" rows="2" placeholder="type your message" id="message-input" style="height: unset;"></textarea>
+                    <textarea class="py-2" rows="2" placeholder="Type your message" id="message-input" style="height: unset;"></textarea>
                 </div>
                 <div class="markdown d-none justify-content-between" id="reply-message-container">
                     <blockquote class="w-100">
@@ -312,7 +312,9 @@
                     <div
                         class="user-message-container {% if request.user == user_message.sender %} sent {% else %} received{% endif %}">
                         <div class="chat-user-img">
-                            <img class="img-thumbnail  rounded-circle" src="{{ user_message.sender.photo.url }}">
+                        {% if user.photo %}
+                            <img class="img-thumbnail  rounded-circle" src="{{ user_message.sender.get_photo_url }}">
+                        {% endif %}
                         </div>
 
                         <div class="user-message text-wrap">
@@ -357,8 +359,10 @@
                 </div>
 
                 <div class="bg-dark d-flex align-items-center px-3 px-md-5 py-1">
+                {% if user.photo %}
                     <img class="img-thumbnail rounded-circle" style="height: 60px !important; width: 60px !important;"
-                        src="{{ other_user.photo.url }}">
+                        src="{{ other_user.get_photo_url }}">
+                    {% endif %}
                     <p class="text-weight-bold font-xlarge pl-3 m-0 text-white">{{ other_user.full_name }} <br>
                     </p>
                 </div>
@@ -583,4 +587,5 @@
         });
     }
 </script>
+
 {% endblock %}

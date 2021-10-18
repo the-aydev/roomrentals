@@ -32,7 +32,7 @@ def ajax_load_messages(request, pk):
         "sender": message.sender.full_name,
         "message": message.message,
         "sent": message.sender == request.user,
-        "picture": other_user.photo.url,
+        "picture": other_user.get_photo_url,
 
         "date_created": naturaltime(message.date_created),
 
@@ -51,7 +51,7 @@ def ajax_load_messages(request, pk):
             "message": m.message,
             "date_created": naturaltime(m.date_created),
 
-            "picture": request.user.photo.url,
+            "picture": request.user.get_photo_url,
             "sent": True,
         })
     print(message_list)
