@@ -10,22 +10,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-@login_required
-def dashboard(request):
-    users = User.objects.all()
-
-    context = {
-        'users': users,
-    }
-
-    return render(request, 'users/dashboard.html', context)
-
-
-# @login_required
-# def settings(request):
-#     return render(request, 'accounts/settings.html')
-
-
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/signup.html'
@@ -70,3 +54,19 @@ def verify_view(request):
 def user_logout(request):
     logout(request)
     return redirect('/users/login/')
+
+
+@login_required
+def dashboard(request):
+    users = User.objects.all()
+
+    context = {
+        'users': users,
+    }
+
+    return render(request, 'users/dashboard.html', context)
+
+
+# @login_required
+# def settings(request):
+#     return render(request, 'accounts/settings.html')

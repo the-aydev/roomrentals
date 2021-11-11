@@ -1,7 +1,7 @@
 from django.contrib.messages import constants as messages
 import os
 import environ
-import django_heroku
+import django_heroku    
 from pathlib import Path
 
 # read the .env file
@@ -14,13 +14,14 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    'pages.apps.PagesConfig',
-    'listings.apps.ListingsConfig',
-    'users.apps.UsersConfig',
-    'blog.apps.BlogConfig',
-    'subscriptions.apps.SubscriptionsConfig',
-    'codes.apps.CodesConfig',
-    'chat.apps.ChatConfig',
+    'pages',
+    'listings',
+    'users',
+    'blog',
+    'subscriptions',
+    'codes',
+    # 'chat',
+    'django_private_chat2.apps.DjangoPrivateChat2Config',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.postgres',
 
     'crispy_forms',
     'phonenumber_field',
@@ -181,3 +183,8 @@ EMAIL_HOST_USER = 'djangotest62@gmail.com'
 EMAIL_HOST_PASSWORD = 'testdjango_99'
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
+
+
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'

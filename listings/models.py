@@ -101,7 +101,6 @@ class Listing(models.Model):
     city = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     price = models.IntegerField()
-    bedroom = models.IntegerField(default=1)
     kitchen = models.CharField(
         max_length=4, choices=Kitchen.choices, default=Kitchen.NO)
     bathroom = models.CharField(
@@ -120,15 +119,6 @@ class Listing(models.Model):
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     verified = models.BooleanField(default=False)
-
-    def delete(self):
-        self.main_photo.storage.delete(self.main_photo.name)
-        self.photo_1.storage.delete(self.photo_1.name)
-        self.photo_2.storage.delete(self.photo_2.name)
-        self.photo_3.storage.delete(self.photo_3.name)
-
-        # This allows us to perform the standard delete except we do this part as well
-        super().delete()
 
     def __str__(self):
         return self.title

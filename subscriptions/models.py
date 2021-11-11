@@ -25,7 +25,8 @@ class Order(models.Model):
 
 
 class Payment(models.Model):
-    amount = models.PositiveIntegerField()
+    subscription = models.ForeignKey(
+        Subscription, max_length=100, null=True, blank=True, on_delete=models.SET_NULL)
     ref = models.CharField(max_length=200)
     email = models.EmailField()
     verified = models.BooleanField()
@@ -35,7 +36,7 @@ class Payment(models.Model):
         ordering = ['-date_created']
 
     def __str__(self):
-        return f"Payment: {self.amount}"
+        return f"Payment: {self.subscription.name}"
 
     def save(self, *args, **kwargs):
         while not self.ref:
@@ -46,13 +47,14 @@ class Payment(models.Model):
         super().save(*args, **kwargs)
 
     def amount_value(self):
-        return self.amount * 100
+        return self.subscription.price * 100
 
     def verify_payment(self):
         paystack = PayStack()
-        status, result = paystack.verify_payment(self.ref, self.amount)
+        status, result = paystack.verify_payment(
+            self.ref, self.subscription.price)
         if status:
-            if result['amount'] / 100 == self.amount:
+            if result['subscription.price'] / 100 == self.subscription.price:
                 self.verified = True
             self.save()
         if self.verified:

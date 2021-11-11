@@ -15,7 +15,7 @@
       <li class="active"><span href="{% url 'home' %}">Home</span></li>
       <li class="active">
         <span class="fa fa-angle-right mx-2" aria-hidden="true"
-          ><a href="{% url 'initiate' %}"></a></span
+          ><a href="{% url 'verify' %}"></a></span
         >Paystack
       </li>
     </ul>
@@ -25,7 +25,7 @@
   <div class="container">
     <div class="d-flex row justify-content-center align-items-center py-md-5 py-3" style="min-height=90">
       <div class="col-12">
-        <h5>Make payment for: ₦ {{payment.amount}}</h5>
+        <h5>Make payment for: ₦ {{payment.subscription.price}}</h5>
           <script src="https://js.paystack.co/v1/inline.js"></script>
           <button class="btn btn-success" id="django-paystack-button" type="button" onclick="payWithPaystack()"> Subscribe </button> 
       </div>
@@ -39,11 +39,11 @@
       let ref = "{{ payment.ref }}";
       let obj = {
         key: "{{ paystack_public_key }}",
-        email: "{{ email }}",
+        email: "{{ user.email }}",
         amount: "{{ payment.amount_value }}",
         ref: ref,
         callback: function (response) {
-          window.location.href = "{% url 'verify-payment' payment.ref %}"
+          window.location.href = "{% url 'verify' payment.ref %}"
         }
       }
 

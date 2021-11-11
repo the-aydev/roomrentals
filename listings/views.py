@@ -1,17 +1,14 @@
 import datetime
 from django.contrib import messages
-from django.http import response, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .choices import *
-
 from .models import Listing
 from .forms import PostAd
-
 from django.contrib.auth import get_user_model
-User = get_user_model()
 
+User = get_user_model()
 
 
 def index(request):
@@ -93,40 +90,15 @@ def search(request):
 def ad(request):
     if request.method == "POST":
         form = PostAd(request.POST)
+
         if form.is_valid():
             post = form.save(commit=False)
             post.landlord = request.user
             post.is_published = True
             post.list_date = datetime.now()
+            post.create()
             post.save()
-            redirect('/Your Ad listing has been posted', pk=post.listing_id)
+            redirect('/', pk=post.listing_id)
     else:
         form = PostAd()
-        messages.success(
-            request, 'Your Ad has been posted successfully'
-        )
     return render(request, 'listings/ad.html', {"form": form})
-
-
-# @login_required
-# def ad(request, pk=None):
-#     instance = User.objects.get(pk=pk) if pk else None
-#     context = dict(save_pk=pk or "")
-#     if request.method == 'POST':
-#         # Only backend upload should be posting here
-#         context['backend_form'] = form = PostAd(
-#             request.POST, request.FILES, instance=instance)
-#         if form.is_valid():
-#             # Uploads image and creates a model instance for it
-#             context['posted'] = form.save(commit=False)
-#             context['landlord'].user = request.user
-#             context['is_published'].user = True
-#             context['list_date'].user = datetime.now()
-#             context['posted'].save()
-
-#         instance = User.objects.get(pk=pk) if pk else None
-#     else:
-#         # Form demonstrating backend upload
-#         context['backend_form'] = PostAd(instance=instance)
-
-#     return render(request, 'listings/ad.html', context)

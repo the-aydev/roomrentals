@@ -16,7 +16,6 @@ class PostAd(forms.ModelForm):
             'address': forms.TextInput(attrs={'placeholder': '1234 Main St'}),
             'description': forms.TextInput(attrs={'placeholder': 'Description'}),
         }
-        # exclude = ('full_name',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,11 +42,12 @@ class PostAd(forms.ModelForm):
                 css_class='form-row'
             ),
             'extras',
+            
             Row(
-                Column('photo_main', css_class='form-group col-md-6 mb-0'),
-                Column('photo_1', css_class='form-group col-md-6 mb-0'),
-                Column('photo_2', css_class='form-group col-md-6 mb-0'),
-                Column('photo_3', css_class='form-group col-md-6 mb-0'),
+                Column('photo_main', css_class='form-group col-md-3 mb-0'),
+                Column('photo_1', css_class='form-group col-md-3 mb-0'),
+                Column('photo_2', css_class='form-group col-md-3 mb-0'),
+                Column('photo_3', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
             Submit('submit', 'List Your Room')
