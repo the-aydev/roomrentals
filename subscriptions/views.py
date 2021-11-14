@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.contrib import messages
-from .models import Subscription, Order, Payment
-from django.shortcuts import get_object_or_404, render, redirect
+from .models import Subscription, Order
+from django.shortcuts import render
 from django.http.response import JsonResponse
+from pypaystack import Transaction, Customer, Plan
 from django.contrib.auth import get_user_model
 import json
 
@@ -41,11 +42,17 @@ def paymentComplete(request):
 
 # Paystack Integration
 
-def verify(request, ref):
-    payment = get_object_or_404(Payment, ref=ref)
-    verified = payment.verify_payment()
-    if verified:
-        messages.success(request, "Verification successful!")
-    else:
-        messages.error(request, "Verification failed!")
-    return redirect('/subscriptions/subscription')
+# def verify(request, ref):
+#     payment = get_object_or_404(Payment, ref=ref)
+#     verified = payment.verify_payment()
+#     if verified:
+#         messages.success(request, "Verification successful!")
+#     else:
+#         messages.error(request, "Verification failed!")
+#     return redirect('/subscriptions/subscription')
+
+def verify(request, id):
+    transaction = Transaction(authorization_key=settings.PAYSTACK_SECRET_KEY)
+    response = transaction.verify(id)
+    data = JsonResponse(response, safe=False)
+    return data

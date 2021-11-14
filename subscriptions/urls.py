@@ -6,5 +6,5 @@ urlpatterns = [
     path('', views.subscription, name='subscription'),
     path('checkout/<int:pk>/', views.checkout, name="checkout"),
     path('complete/', views.paymentComplete, name="complete"),
-    path('<str:ref>/', views.verify, name="verify"),
+    # path('<str:ref>/', views.verify, name="verify"),
 ]

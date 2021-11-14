@@ -6,61 +6,63 @@
 
 {% block content %}
 
-<section class="w3l-about-breadcrumb">
-  <div class="breadumb-bg breadcrumb-bg-about pt-5">
-    <div class="container pt-lg-5 py-3"></div>
-  </div>
-</section>
-<section class="w3l-breadcrumb">
-  <div class="container">
-    <ul class="breadcrumbs-custom-path">
-      <li class="active"><span href="{% url 'home' %}">Home</span></li>
-      <li class="active">
-        <span class="fa fa-angle-right mx-2" aria-hidden="true"
-          ><a href="{% url 'subscription' %}"></a
-        ></span>
-        Upgrade
-      </li>
-    </ul>
-  </div>
-</section>
+  <section class="w3l-about-breadcrumb">
+    <div class="breadumb-bg breadcrumb-bg-about pt-5">
+      <div class="container pt-lg-5 py-3"></div>
+    </div>
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumbs-custom-path">
+        <li class="active"><span href="{% url 'home' %}">Home</span></li>
+        <li class="active">
+          <span class="fa fa-angle-right mx-2" aria-hidden="true"
+            ><a href="{% url 'subscription' %}"></a
+          ></span>
+          Upgrade
+        </li>
+      </ul>
+    </div>
+  </section>
 
-<div class="wrap">
-  <h1>Subscription Options</h1>
-  <div class="pricing-grids">
-    {% for subscription in subscriptions %}
-    <div class="pricing-grid-w3ls">
-      <div class="price-value">
-        <h2>{{ subscription.name }}</h2>
-        <p class="price-label-1"><span>₦</span>{{ subscription.price }}</p>
-      </div>
-      <div class="price-bg">
-        <ul class="count-agile">
-          <li>{{ subscription.ad_detail }}</li>
-          <li>{{ subscription.chat_detail }}</li>
-          <li>{{ subscription.coverage_detail }}</li>
-          <li>{{ subscription.boosted_listing_detail }}</li>
-        </ul>
-        <div class="more">
-          <a
-            class="btn btn-primary"
-            data-wow-delay=".5s"
-            target="_blank" 
-            href="{% url 'checkout' subscription.id %}"
-            >Paypal</a>
-          <a
-            class="btn btn-primary"
-            data-wow-delay=".5s"
-            target="_blank" 
-            href="{% url 'checkout' subscription.id %}"
-            >Paystack</a>
+  <div class="wrap">
+    <h1>Subscription Options</h1>
+    <div class="pricing-grids">
+      {% for subscription in subscriptions %}
+      <div class="pricing-grid-w3ls">
+        <div class="price-value">
+          <h2>{{ subscription.name }}</h2>
+          <p class="price-label-1"><span>₦</span>{{ subscription.price }}</p>
+        </div>
+        <div class="price-bg">
+          <ul class="count-agile">
+            <li>{{ subscription.ad_detail }}</li>
+            <li>{{ subscription.chat_detail }}</li>
+            <li>{{ subscription.coverage_detail }}</li>
+            <li>{{ subscription.boosted_listing_detail }}</li>
+          </ul>
+          <div class="more">
+            <a
+              class="btn btn-primary"
+              data-wow-delay=".5s"
+              target="_blank" 
+              href="{% url 'checkout' subscription.id %}"
+              >Paypal</a>
+            <a
+              class="btn btn-primary"
+              data-wow-delay=".5s"
+              target="_blank" 
+              href="{% url 'checkout' subscription.id %}"
+              >Paystack</a>
+          </div>
         </div>
       </div>
+      {% endfor %}
+      <div class="clear"></div>
     </div>
-    {% endfor %}
     <div class="clear"></div>
   </div>
-  <div class="clear"></div>
-</div>
+
+  
 
 {% endblock content %}
