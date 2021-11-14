@@ -11,7 +11,6 @@ User = get_user_model()
 
 # Paypal Integration
 
-
 def subscription(request):
     subscriptions = Subscription.objects.all()
     users = User.objects.all()
@@ -42,28 +41,8 @@ def paymentComplete(request):
 
 # Paystack Integration
 
-# def verify(request, ref):
-#     payment = get_object_or_404(Payment, ref=ref)
-#     verified = payment.verify_payment()
-#     if verified:
-#         messages.success(request, "Verification successful!")
-#     else:
-#         messages.error(request, "Verification failed!")
-#     return redirect('/subscriptions/subscription')
-
 def verify(request, id):
     transaction = Transaction(authorization_key=settings.PAYSTACK_SECRET_KEY)
     response = transaction.verify(id)
     data = JsonResponse(response, safe=False)
     return data
-
-
-# def verify(request, id)
-#     plan = Plan(authorization_key=settings.PAYSTACK_SECRET_KEY)
-#     response = plan.create("Silver", 100, 'Monthly')
-#     response = plan.create("Gold", 200, 'Monthly')
-#     response = plan.create("Platinum", 300, 'Monthly')
-#     response = plan.getall()
-#     response = plan.verify(id)
-#     data = JsonResponse(response, safe=False)
-#     return data

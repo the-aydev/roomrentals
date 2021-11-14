@@ -70,3 +70,5 @@ def dashboard(request):
 # @login_required
 # def settings(request):
 #     return render(request, 'accounts/settings.html')
+
+

@@ -73,6 +73,7 @@
       // plan: '',  
       email: '{{ user.email }}',
       amount: "{{ subscription.price }}" + "00",
+      amount: 100 + "00",
       currency: "NGN",
       ref: ''+Math.floor((Math.random() * 1000000000) + 1),
       callback: function (response) {
@@ -89,11 +90,11 @@
               if (response[3].status == "success") {
                 $(".alert").removeClass("alert-warning");
                 $(".alert").addClass("alert-success");
-                $(".alert").text("Transaction verified");
-                console.log("Transaction verified");
+                $(".alert").text("Subscription verified");
+                console.log("Subscription verified");
                 $("form").trigger("reset");
               } else {
-                $(".alert").text("Transaction reference not found");
+                $(".alert").text("Subscription reference not found");
               }
             }
           })
