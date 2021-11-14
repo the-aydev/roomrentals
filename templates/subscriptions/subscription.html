@@ -52,7 +52,8 @@
               class="btn btn-primary"
               data-wow-delay=".5s"
               target="_blank" 
-              href="{% url 'checkout' subscription.id %}"
+              type="submit" 
+              onclick="payWithPaystack()"
               >Paystack</a>
           </div>
         </div>
@@ -63,6 +64,43 @@
     <div class="clear"></div>
   </div>
 
-  
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <script>
+  function payWithPaystack(){
+    var handler = PaystackPop.setup({
+      key: '{{ pk_public }}',
+      // plan: '',  
+      email: '{{ user.email }}',
+      amount: "{{ subscription.price }}" + "00",
+      currency: "NGN",
+      ref: ''+Math.floor((Math.random() * 1000000000) + 1),
+      callback: function (response) {
+          var referenceid = response.reference;
+          $.ajax({
+            type: "GET",
+            // method: "GET",
+            url: "/verify/" + referenceid,
+            beforeSend: function () {
+              console.log("Sending request");
+              $(".alert").text("Sending request");
+            },
+            success: function (response) {
+              if (response[3].status == "success") {
+                $(".alert").removeClass("alert-warning");
+                $(".alert").addClass("alert-success");
+                $(".alert").text("Transaction verified");
+                console.log("Transaction verified");
+                $("form").trigger("reset");
+              } else {
+                $(".alert").text("Transaction reference not found");
+              }
+            }
+          })
+      },
+    });
+    handler.openIframe();
+    }
+  </script>
 
 {% endblock content %}

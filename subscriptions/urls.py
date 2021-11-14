@@ -7,4 +7,5 @@ urlpatterns = [
     path('checkout/<int:pk>/', views.checkout, name="checkout"),
     path('complete/', views.paymentComplete, name="complete"),
     # path('<str:ref>/', views.verify, name="verify"),
+    path('verify/<int:id>/', views.verify, name="verify"),
 ]

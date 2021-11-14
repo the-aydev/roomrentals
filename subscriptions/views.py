@@ -17,7 +17,7 @@ def subscription(request):
     users = User.objects.all()
     context = {
         'subscriptions': subscriptions,
-        'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
+        'pk_public': settings.PAYSTACK_PUBLIC_KEY,
         'users': users,
     }
     return render(request, 'subscriptions/subscription.html', context)
@@ -56,3 +56,14 @@ def verify(request, id):
     response = transaction.verify(id)
     data = JsonResponse(response, safe=False)
     return data
+
+
+# def verify(request, id)
+#     plan = Plan(authorization_key=settings.PAYSTACK_SECRET_KEY)
+#     response = plan.create("Silver", 100, 'Monthly')
+#     response = plan.create("Gold", 200, 'Monthly')
+#     response = plan.create("Platinum", 300, 'Monthly')
+#     response = plan.getall()
+#     response = plan.verify(id)
+#     data = JsonResponse(response, safe=False)
+#     return data
