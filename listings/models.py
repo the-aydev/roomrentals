@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
+from django.urls import reverse
 
 User = settings.AUTH_USER_MODEL
 
@@ -122,3 +123,6 @@ class Listing(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('home')
