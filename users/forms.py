@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django import forms
 from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
@@ -115,3 +116,31 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("Invalid credentials")
         self.user = user
         return data
+
+
+class EditProfileForm(UserChangeForm):
+    number = PhoneNumberField(
+        widget=PhoneNumberPrefixWidget(initial='NA'))
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={'class': 'form-control'}))
+    full_name = forms.CharField(
+        max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    photo = forms.ImageField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}),)
+
+    class Meta:
+        model = User
+        fields = ('number', 'email', 'full_name', 'photo')
+
+
+class PasswordChangingForm(PasswordChangeForm):
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'type': 'password'}))
+    new_password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'type': 'password'}))
+    new_password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'type': 'password'}))
+
+    class Meta:
+        model = User
+        fields = ('password', 'new_password1', 'new_password2')

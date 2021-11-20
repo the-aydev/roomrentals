@@ -1,8 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
+from django.views import generic
 from django.views.generic import CreateView
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, EditProfileForm, PasswordChangingForm
 from codes.forms import CodeForm
 from .utils import send_sms
 
@@ -94,3 +97,29 @@ class UsersListView(LoginRequiredMixin, ListView):
             "pk": str(user.pk)
         } for user in users]
         return JsonResponse(data, safe=False, **response_kwargs)
+
+
+class EditProfilePageView(generic.UpdateView):
+	model = User
+	template_name = 'users/edit_profile_page.html'
+	fields = ['bio', 'profile_pic', 'website_url', 'facebook_url',
+           'twitter_url', 'instagram_url', 'pinterest_url']
+	success_url = reverse_lazy('users/dashboard')
+
+
+class PasswordsChangeView(PasswordChangeView):
+	form_class = PasswordChangingForm
+	success_url = reverse_lazy('users/password_change')
+
+
+def password_success(request):
+	return render(request, 'users/password_success.html', {})
+
+
+class UserEditView(generic.UpdateView):
+	form_class = EditProfileForm
+	template_name = 'users/edit_profile.html'
+	success_url = reverse_lazy('home')
+
+	def get_object(self):
+		return self.request.user

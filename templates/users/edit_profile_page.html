@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} | Edit Profile Page {% endblock %}
+
+{% block content %}
+  <section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li class="active"><span href="{% url 'home' %}">Home</span></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Profile</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Edit Profile Page</li>
+        </ul>
+    </div>
+  </section>
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          {% if user.is_authenticated %}
+	        {% if user.id == profile.user.id %}
+          <h1 class="display-4">Edit Profile Page...</h1>
+          <p class="lead">Complete the form to have your Room listed!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="form-group">
+      <form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="btn btn-secondary">Update Profile Page</button>
+    </div>
+    {% else %}
+    	You are not the correct User To Edit This Page...
+	  {% endif %}
+  </div>
+  {% else %}
+	You're not allowed here! (and you know it...)
+{% endif %}
+
+{% endblock content %}

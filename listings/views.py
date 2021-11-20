@@ -3,9 +3,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .choices import *
 from .models import Listing
-from .forms import PostAd
+from .forms import PostAd, EditAd
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -86,19 +88,37 @@ def search(request):
     return render(request, 'listings/search.html', context)
 
 
-@login_required
-def ad(request):
-    if request.method == "POST":
-        form = PostAd(request.POST)
+# @login_required
+# def ad(request):
+#     if request.method == "POST":
+#         form = PostAd(request.POST)
 
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.landlord = request.user
-            post.is_published = True
-            post.list_date = datetime.now()
-            post.create()
-            post.save()
-            redirect('/', pk=post.listing_id)
-    else:
-        form = PostAd()
-    return render(request, 'listings/ad.html', {"form": form})
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.landlord = request.user
+#             post.is_published = True
+#             post.list_date = datetime.now()
+#             post.create()
+#             post.save()
+#             redirect('/', pk=post.listing_id)
+#     else:
+#         form = PostAd()
+#     return render(request, 'listings/ad.html', {"form": form})
+
+
+class AddListingView(CreateView):
+	model = Listing
+	form_class = PostAd
+	template_name = 'listings/ad.html'
+
+
+class UpdateListingView(UpdateView):
+	model = Listing
+	form_class = EditAd
+	template_name = 'listings/update.html'
+
+
+class DeleteListingView(DeleteView):
+	model = Listing
+	template_name = 'listings/delete.html'
+	success_url = reverse_lazy('home')

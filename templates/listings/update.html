@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} | Update Ad {% endblock %}
+
+{% block content %}
+  <section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+  </section>
+  <section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li class="active"><span href="{% url 'home' %}">Home</span></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Listings</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Ad</li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span>Edit Ad</li>
+        </ul>
+    </div>
+  </section>
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">List Your Room</h1>
+          <p class="lead">Complete the form to have your Room listed!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="form-group">
+      {% crispy form %}
+    </div>
+  </div>
+
+{% endblock content %}
