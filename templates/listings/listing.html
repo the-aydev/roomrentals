@@ -36,7 +36,7 @@
                 <li><span class="fa fa-clock-o"></span>{{ listing.list_date | timesince }}</li>
             </ul>
             <ul class="share-post">
-                <a href="#url" class="cost-estate m-o">{{ listing.price | intcomma }}</a>
+                <a href="#url" class="cost-estate m-o">₦{{ listing.price | intcomma }}</a>
             </ul>
         </div>
         <div class="row">
@@ -90,7 +90,7 @@
                                 <li><strong>Garage :</strong>{{ listing.bedroom }}</li>
                                 <li><strong>Garden :</strong> 2 </li>
                                 <li><strong>Bathroom :</strong> Brick </li>
-                                <li><strong>Price :</strong>{{ listing.price | intcomma }}</li>
+                                <li><strong>Price :</strong>₦{{ listing.price | intcomma }}</li>
                                 <li><strong>Avaiable from :</strong>{{ listing.list_date }}</li>
                             </ul>
                         </div>
@@ -123,7 +123,7 @@
                             </div>
                         </article>
                         <div>
-                            <a href="{% url 'chatroom' user.pk %}"><button class="btn btn-primary btn-style w-100" data-toggle="modal" data-target="#inquiryModal" href="{% url 'chatroom' user.pk %}" >Chat</button>
+                            <a href="{% url 'dialogs_detail' user.full_name %}"><button class="btn btn-primary btn-style w-100" data-toggle="modal" data-target="#inquiryModal" >Chat</button>
                             </a>
                         </div>
                     </div>

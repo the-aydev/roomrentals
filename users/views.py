@@ -5,6 +5,14 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from codes.forms import CodeForm
 from .utils import send_sms
+
+from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView, ListView
+from django.contrib.auth.models import AbstractBaseUser
+
+from typing import List
+
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -72,3 +80,17 @@ def dashboard(request):
 #     return render(request, 'accounts/settings.html')
 
 
+class UsersListView(LoginRequiredMixin, ListView):
+    http_method_names = ['get', ]
+
+    def get_queryset(self):
+        return User.objects.all().exclude(id=self.request.user.id)
+
+    def render_to_response(self, context, **response_kwargs):
+        users: List[AbstractBaseUser] = context['object_list']
+
+        data = [{
+            "username": user.get_username(),
+            "pk": str(user.pk)
+        } for user in users]
+        return JsonResponse(data, safe=False, **response_kwargs)

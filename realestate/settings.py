@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'blog',
     'subscriptions',
     'codes',
-    # 'chat',
     'django_private_chat2.apps.DjangoPrivateChat2Config',
 
     'django.contrib.admin',
@@ -183,8 +182,3 @@ EMAIL_HOST_USER = 'djangotest62@gmail.com'
 EMAIL_HOST_PASSWORD = 'testdjango_99'
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
-
-
-# CHAT_WS_SERVER_HOST = 'localhost'
-# CHAT_WS_SERVER_PORT = 5002
-# CHAT_WS_SERVER_PROTOCOL = 'ws'
