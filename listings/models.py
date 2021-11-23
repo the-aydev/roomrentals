@@ -95,7 +95,7 @@ class Listing(models.Model):
         YES = 'Yes'
         NO = 'No'
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     state = models.CharField(max_length=100)

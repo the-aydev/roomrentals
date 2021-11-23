@@ -51,6 +51,24 @@ def listing(request, listing_id):
     return render(request, 'listings/listing.html', context)
 
 
+class AddListingView(CreateView):
+    model = Listing
+    form_class = PostAd
+    template_name = 'listings/ad.html'
+
+
+class UpdateListingView(UpdateView):
+    model = Listing
+    form_class = EditAd
+    template_name = 'dashboard/update_ad.html'
+
+
+class DeleteListingView(DeleteView):
+    model = Listing
+    template_name = 'dashboard/delete_ad.html'
+    success_url = reverse_lazy('home')
+
+
 def search(request):
     queryset_list = Listing.objects.order_by('-list_date')
 
@@ -86,39 +104,3 @@ def search(request):
     }
 
     return render(request, 'listings/search.html', context)
-
-
-# @login_required
-# def ad(request):
-#     if request.method == "POST":
-#         form = PostAd(request.POST)
-
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.landlord = request.user
-#             post.is_published = True
-#             post.list_date = datetime.now()
-#             post.create()
-#             post.save()
-#             redirect('/', pk=post.listing_id)
-#     else:
-#         form = PostAd()
-#     return render(request, 'listings/ad.html', {"form": form})
-
-
-class AddListingView(CreateView):
-	model = Listing
-	form_class = PostAd
-	template_name = 'listings/ad.html'
-
-
-class UpdateListingView(UpdateView):
-	model = Listing
-	form_class = EditAd
-	template_name = 'listings/update.html'
-
-
-class DeleteListingView(DeleteView):
-	model = Listing
-	template_name = 'listings/delete.html'
-	success_url = reverse_lazy('home')

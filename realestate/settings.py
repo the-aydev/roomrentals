@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
     
+    
     'ckeditor',
 
     'django.contrib.sites',

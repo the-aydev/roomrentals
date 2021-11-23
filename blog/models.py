@@ -39,10 +39,6 @@ class BlogPost(models.Model):
         ordering = ['pub_date']
 
     def save(self, *args, **kwargs):
-        """
-        Set publish date to the date when post's published status is switched to True, 
-        reset the date if post is unpublished
-        """
         if self.published and self.pub_date is None:
             self.pub_date = datetime.now()
         elif not self.published and self.pub_date is not None:

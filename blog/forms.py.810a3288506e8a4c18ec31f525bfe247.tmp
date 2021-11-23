@@ -1,0 +1,31 @@
+from django import forms
+from .models import BlogPost
+
+
+
+class PostBlog(forms.ModelForm):
+	class Meta:
+		model = BlogPost
+		fields = ('title', 'image', 'description', 'snippet', 'header_image')
+
+		widgets = {
+			'title': forms.TextInput(attrs={'class': 'form-control'}),
+			'image': forms.ImageField(),
+			'description': forms.Textarea(attrs={'class': 'form-control'}),			
+			'snippet': forms.Textarea(attrs={'class': 'form-control'}),			
+		}
+
+
+class EditBlog(forms.ModelForm):
+	class Meta:
+		model = BlogPost
+		fields = ('title', 'title_tag', 'body', 'snippet')
+
+		widgets = {
+			'title': forms.TextInput(attrs={'class': 'form-control'}),
+			'image': forms.ImageField(),
+
+			'title_tag': forms.TextInput(attrs={'class': 'form-control'}),
+			'body': forms.Textarea(attrs={'class': 'form-control'}),			
+			'snippet': forms.Textarea(attrs={'class': 'form-control'}),			
+		}
