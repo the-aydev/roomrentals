@@ -78,9 +78,9 @@ def dashboard(request):
     return render(request, 'dashboard/dashboard.html', context)
 
 
-# @login_required
-# def settings(request):
-#     return render(request, 'accounts/settings.html')
+@login_required
+def settings(request):
+    return render(request, 'users/settings.html')
 
 
 class UsersListView(LoginRequiredMixin, ListView):
@@ -99,27 +99,19 @@ class UsersListView(LoginRequiredMixin, ListView):
         return JsonResponse(data, safe=False, **response_kwargs)
 
 
-class EditProfilePageView(generic.UpdateView):
-	model = User
-	template_name = 'users/edit_profile_page.html'
-	fields = ['bio', 'profile_pic', 'website_url', 'facebook_url',
-           'twitter_url', 'instagram_url', 'pinterest_url']
-	success_url = reverse_lazy('users/dashboard')
-
-
 class PasswordsChangeView(PasswordChangeView):
-	form_class = PasswordChangingForm
-	success_url = reverse_lazy('users/password_change')
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('users/password_success')
 
 
 def password_success(request):
-	return render(request, 'users/password_success.html', {})
+    return render(request, 'users/password_success.html', {})
 
 
 class UserEditView(generic.UpdateView):
-	form_class = EditProfileForm
-	template_name = 'users/edit_profile.html'
-	success_url = reverse_lazy('home')
+    form_class = EditProfileForm
+    template_name = 'users/edit_profile.html'
+    success_url = reverse_lazy('home')
 
-	def get_object(self):
-		return self.request.user
+    def get_object(self):
+        return self.request.user
